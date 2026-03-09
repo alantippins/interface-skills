@@ -313,11 +313,11 @@ AI generates interfaces that work in the happy path demo. It doesn't design for:
 | Silent failures | "I clicked submit and nothing happened" | Transparency |
 | Buttons that do nothing | "This button looks active but doesn't work" | Transparency |
 | Double-action risk | "I got charged twice" | Forgiveness |
-| Destructive actions without safeguards | "I accidentally deleted everything" | Reversibility |
+| Permanent actions without safeguards | "I accidentally removed everything" | Reversibility |
 | Fake success | "It said it saved but my changes are gone" | Transparency |
 | Missing UI states | Crash on first load, blank on empty | Forgiveness |
 | Trapped states | "I can't close this popup" | Escape |
-| Unprotected destructive APIs | "Someone deleted my account" | Forgiveness |
+| Unguarded critical endpoints | "My data was modified without my action" | Forgiveness |
 
 ### Quick Audit Checklist
 
@@ -330,7 +330,6 @@ AI generates interfaces that work in the happy path demo. It doesn't design for:
 - [ ] No empty state when lists have no items
 - [ ] No error state when data fails to load
 - [ ] Modals with no way to close them
-- [ ] Destructive actions anyone can trigger
 
 ---
 
@@ -348,7 +347,7 @@ Before checking anything, understand what users can DO:
 
 Scan code for pattern violations:
 
-**Reversibility:** `onClick={() => delete` without confirmation/undo nearby
+**Reversibility:** `onClick={() => remove` without confirmation/undo nearby
 **Forgiveness:** Submit buttons without `disabled={isLoading}`
 **Persistence:** `useState` without localStorage/API persistence
 **Transparency:** `await fetch` without try/catch, no toast after async

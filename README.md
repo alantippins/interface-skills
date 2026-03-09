@@ -33,10 +33,17 @@ Use **audit** when you want to learn or teach. Use **review** when verbose = ign
 ## Install
 
 ```bash
-npx skills add alantippins/interface-skills -y
+# Interactive — choose which skills and agents
+npx skills add alantippins/interface-skills
+
+# Claude Code only
+npx skills add alantippins/interface-skills -a claude-code
+
+# Multiple specific agents
+npx skills add alantippins/interface-skills -a claude-code -a cursor -a windsurf
 ```
 
-Works with Claude Code, Cursor, Windsurf, and 40+ other agents via [vercel-labs/skills](https://github.com/vercel-labs/skills).
+Works with Claude Code, Cursor, Windsurf, and [40+ other agents](https://github.com/vercel-labs/skills).
 
 ## The Laws
 
