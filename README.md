@@ -20,15 +20,10 @@ Four skills that surface interaction problems before users find them:
 ## Install
 
 ```bash
-npx @anthropic-ai/claude-code skills add alantippins/interface-skills
+npx skills add alantippins/interface-skills -y
 ```
 
-Or clone locally:
-
-```bash
-git clone https://github.com/alantippins/interface-skills.git
-npx @anthropic-ai/claude-code skills add ./interface-skills
-```
+Works with Claude Code, Cursor, Windsurf, and 40+ other agents via [vercel-labs/skills](https://github.com/vercel-labs/skills).
 
 ## The Laws
 
