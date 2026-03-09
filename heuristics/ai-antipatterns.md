@@ -1,329 +1,180 @@
-# AI Code Anti-Patterns
+# AI Design Anti-Patterns
 
-Common issues in AI-generated code (Claude, GPT, Copilot). These are the patterns that get missed when building fast with AI assistance.
+Common UX issues in AI-generated interfaces. These are the patterns that get missed when building fast with AI assistance — described by what users experience, not implementation details.
 
 ---
 
 ## The Core Problem
 
-AI generates code that works in the happy path demo. It doesn't generate code that handles:
+AI generates interfaces that work in the happy path demo. It doesn't design for:
 - What happens when things go wrong
 - What happens when users make mistakes
 - What happens when the network fails
 - What happens when users leave and come back
 
-These anti-patterns are training signal gaps, not AI limitations. As you find them, you're filling in what the training data missed.
+These anti-patterns are training signal gaps, not AI limitations. As you spot them, you're filling in what the training data missed.
 
 ---
 
-## Anti-Pattern: State Only in React State
+## Anti-Pattern: State That Doesn't Survive Refresh
 
-**What it looks like:**
-```javascript
-const [todos, setTodos] = useState([]);
-const [formData, setFormData] = useState({ title: '', description: '' });
-```
+**What users experience:** "I spent 20 minutes filling out this form, refreshed the page, and everything is gone." Or: "My cart was full yesterday, now it's empty."
 
-**The problem:** This state vanishes on refresh, tab close, or navigation. Users lose work they thought was saved.
+**Why this happens:** AI defaults to temporary in-memory state. It doesn't think about persistence unless explicitly asked.
+
+**What to check:**
+- Does form data survive browser refresh?
+- Do draft states persist when navigating away and back?
+- Is important data saved to backend or localStorage?
 
 **Principle violated:** Law of Persistence
 
-**The fix:**
-```javascript
-// Quick: localStorage
-const [todos, setTodos] = useLocalStorage('todos', []);
-
-// Better: backend persistence with optimistic UI
-const { data: todos, mutate } = useSWR('/api/todos');
-```
-
-**Detection pattern:** `useState` with no corresponding `localStorage`, `sessionStorage`, or API call for persistence.
-
 ---
 
-## Anti-Pattern: No Error Handling Around Async
+## Anti-Pattern: Silent Failures
 
-**What it looks like:**
-```javascript
-const handleSubmit = async () => {
-  const result = await fetch('/api/submit', {
-    method: 'POST',
-    body: JSON.stringify(data)
-  });
-  setData(result);
-}
-```
+**What users experience:** "I clicked submit and nothing happened." Or: "The page froze and I don't know if it worked." Sometimes the action succeeded, sometimes it failed — users can't tell.
 
-**The problem:** When the fetch fails, nothing happens. Or worse, it crashes. Users see a frozen UI or error boundary.
+**Why this happens:** AI generates the success path but forgets error handling. When something breaks, the UI just stops.
+
+**What to check:**
+- Does every action provide visible feedback (success or failure)?
+- Are error messages specific and actionable?
+- Does the UI indicate when something is loading vs broken?
 
 **Principle violated:** Law of Transparency
 
-**The fix:**
-```javascript
-const handleSubmit = async () => {
-  setIsLoading(true);
-  try {
-    const result = await fetch('/api/submit', {
-      method: 'POST',
-      body: JSON.stringify(data)
-    });
-    if (!result.ok) throw new Error('Failed to submit');
-    setData(await result.json());
-    toast.success('Submitted successfully');
-  } catch (error) {
-    toast.error('Failed to submit. Please try again.');
-    // Don't clear the form - let them retry
-  } finally {
-    setIsLoading(false);
-  }
-}
-```
-
-**Detection pattern:** `await fetch` or `await api.` without try/catch wrapper.
-
 ---
 
-## Anti-Pattern: Console.log Placeholder Handlers
+## Anti-Pattern: Buttons That Do Nothing
 
-**What it looks like:**
-```javascript
-<Button onClick={() => console.log('delete clicked')}>Delete</Button>
-<Button onClick={() => console.log('TODO: implement save')}>Save</Button>
-```
+**What users experience:** "I clicked Save and nothing happened." Or: "This button looks active but doesn't work." Users think the app is broken.
 
-**The problem:** Button looks clickable, does nothing. Users think the app is broken.
+**Why this happens:** AI generates placeholder handlers that log to console instead of doing real work. The UI looks complete but isn't.
+
+**What to check:**
+- Does every interactive element have a real action?
+- Are unimplemented features visibly disabled or hidden?
+- Do buttons provide feedback when clicked?
 
 **Principle violated:** Law of Transparency
 
-**The fix:** Either implement the handler or clearly disable the button:
-```javascript
-<Button onClick={handleDelete}>Delete</Button>
-// OR
-<Button disabled title="Coming soon">Save</Button>
-```
-
-**Detection pattern:** `console.log` inside onClick handlers, especially with "TODO" or "clicked" messages.
-
 ---
 
-## Anti-Pattern: No Loading/Disabled State on Buttons
+## Anti-Pattern: Double-Action Risk
 
-**What it looks like:**
-```javascript
-<Button onClick={handleSubmit}>Submit</Button>
-```
+**What users experience:** "I clicked once but it processed twice." "I got charged twice because nothing showed it was processing."
 
-**The problem:** Users click again because nothing happened. Double-submits, duplicate charges, race conditions.
+**Why this happens:** AI forgets to disable buttons during async operations. Users click again because they got no feedback.
+
+**What to check:**
+- Are buttons disabled while their action processes?
+- Is there visual feedback (spinner, loading state) during async operations?
+- Can users trigger duplicate submissions?
 
 **Principle violated:** Law of Forgiveness
 
-**The fix:**
-```javascript
-<Button
-  onClick={handleSubmit}
-  disabled={isLoading}
->
-  {isLoading ? 'Submitting...' : 'Submit'}
-</Button>
-```
-
-**Detection pattern:** `<Button onClick={asyncFunction}>` without `disabled={isLoading}` nearby.
-
 ---
 
-## Anti-Pattern: Delete Without Any Safeguard
+## Anti-Pattern: Destructive Actions Without Safeguards
 
-**What it looks like:**
-```javascript
-<Button onClick={() => deleteItem(id)}>Delete</Button>
-```
+**What users experience:** "I accidentally deleted everything and there's no undo." "One wrong click and my work is gone forever."
 
-**The problem:** One wrong click permanently destroys user data. No confirmation, no undo, no recovery.
+**Why this happens:** AI implements delete as a direct action without confirmation, undo, or soft delete. The happy path doesn't consider mistakes.
+
+**What to check:**
+- Do destructive actions have confirmation dialogs or undo options?
+- Is there a way to recover from accidental deletion?
+- Are dangerous buttons visually distinct from safe ones?
 
 **Principle violated:** Law of Reversibility
 
-**The fix (tiered):**
-```javascript
-// Quick: confirmation dialog
-<Button onClick={() => {
-  if (confirm('Delete this item?')) deleteItem(id);
-}}>Delete</Button>
-
-// Better: undo toast
-<Button onClick={() => {
-  setDeletedItem(item);
-  showUndoToast('Item deleted', () => restoreItem(item));
-  softDelete(id);
-}}>Delete</Button>
-
-// Best: soft delete to trash
-<Button onClick={() => moveToTrash(id)}>Delete</Button>
-```
-
-**Detection pattern:** `delete`, `remove`, `destroy` in onClick without `confirm`, `setShowModal`, or undo logic nearby.
-
 ---
 
-## Anti-Pattern: Optimistic UI Without Rollback
+## Anti-Pattern: Fake Success
 
-**What it looks like:**
-```javascript
-const handleToggle = async () => {
-  setIsComplete(!isComplete); // Optimistic update
-  await api.updateTodo(id, { isComplete: !isComplete });
-}
-```
+**What users experience:** "The UI said it saved but when I came back, my changes were gone." The interface showed success, but the action actually failed.
 
-**The problem:** Shows success, actually failed. User thinks item is saved, it's not.
+**Why this happens:** AI implements optimistic UI updates without rollback on failure. Shows success immediately, never corrects when the backend rejects it.
+
+**What to check:**
+- When actions fail, does the UI revert to the actual state?
+- Does success feedback only appear after server confirmation?
+- Are users warned when their local state differs from server state?
 
 **Principle violated:** Law of Transparency
 
-**The fix:**
-```javascript
-const handleToggle = async () => {
-  const previousValue = isComplete;
-  setIsComplete(!isComplete); // Optimistic update
-  try {
-    await api.updateTodo(id, { isComplete: !isComplete });
-  } catch {
-    setIsComplete(previousValue); // Rollback
-    toast.error('Failed to update. Please try again.');
-  }
-}
-```
-
-**Detection pattern:** State set before await without try/catch and rollback in catch block.
-
 ---
 
-## Anti-Pattern: Hard-Coded Happy Path Only
+## Anti-Pattern: Missing UI States
 
-**What it looks like:**
-```javascript
-const UserProfile = () => {
-  const { data } = useFetch('/api/user');
-  return <div>{data.name}</div>; // What if data is undefined?
-}
-```
+**What users experience:** Crash on first load. Error when the list is empty. Blank screen while data loads. The app breaks on any edge case.
 
-**The problem:** First edge case = crash. Loading state, empty state, error state all cause runtime errors.
+**Why this happens:** AI codes for the "data exists" case. Loading, empty, and error states are afterthoughts that don't get implemented.
+
+**What to check:**
+- Is there a loading state while data fetches?
+- Is there an empty state when no data exists?
+- Is there an error state when fetching fails?
+- Do all states guide users on what to do next?
 
 **Principle violated:** Law of Forgiveness
 
-**The fix:**
-```javascript
-const UserProfile = () => {
-  const { data, isLoading, error } = useFetch('/api/user');
-
-  if (isLoading) return <Skeleton />;
-  if (error) return <ErrorState message="Failed to load profile" />;
-  if (!data) return <EmptyState message="Profile not found" />;
-
-  return <div>{data.name}</div>;
-}
-```
-
-**Detection pattern:** Data access without null check, loading check, or error check.
-
 ---
 
-## Anti-Pattern: Modal Without Escape
+## Anti-Pattern: Trapped States
 
-**What it looks like:**
-```javascript
-<Modal open={isOpen}>
-  <form onSubmit={handleSubmit}>
-    <input />
-    <Button type="submit">Submit</Button>
-  </form>
-</Modal>
-```
+**What users experience:** "I can't close this popup." "There's no way to go back." "I'm stuck in this wizard and can't exit."
 
-**The problem:** User can't close the modal without submitting. No X, no ESC, no backdrop click.
+**Why this happens:** AI forgets escape routes. Creates modals without close buttons, flows without back options, dialogs that trap focus.
+
+**What to check:**
+- Can every modal be dismissed (X button, ESC key, backdrop click)?
+- Do multi-step flows have back/cancel options?
+- Does browser back button work as expected?
+- Can onboarding be skipped?
 
 **Principle violated:** Law of Escape
 
-**The fix:**
-```javascript
-<Modal
-  open={isOpen}
-  onClose={() => setIsOpen(false)}
-  closeOnEsc
-  closeOnOverlayClick
->
-  <form onSubmit={handleSubmit}>
-    <button type="button" onClick={() => setIsOpen(false)}>Cancel</button>
-    <input />
-    <Button type="submit">Submit</Button>
-  </form>
-</Modal>
-```
+---
 
-**Detection pattern:** `<Modal` without `onClose` prop or close button inside.
+## Anti-Pattern: Unprotected Destructive APIs
+
+**What users experience:** "Someone deleted my account." Or worse, they never know — their data is simply gone.
+
+**Why this happens:** AI generates working endpoints without auth checks or ownership verification. Anyone can call any action.
+
+**What to check:**
+- Do destructive actions verify the user is authorized?
+- Is ownership checked before modifying data?
+- Are API endpoints protected from unauthorized access?
+
+**Principle violated:** Law of Forgiveness
 
 ---
 
-## Anti-Pattern: No Auth Check on Destructive Operations
+## Quick Audit Checklist
 
-**What it looks like:**
-```javascript
-// API route
-export async function DELETE(req) {
-  const { id } = await req.json();
-  await db.delete(items).where(eq(items.id, id));
-  return Response.json({ success: true });
-}
-```
+When reviewing AI-generated interfaces, watch for these behaviors:
 
-**The problem:** Anyone can delete anything. No auth check, no ownership verification.
-
-**Principle violated:** Law of Forgiveness (assumes good actors, punishes bad requests with data loss)
-
-**The fix:**
-```javascript
-export async function DELETE(req) {
-  const session = await getSession(req);
-  if (!session) return Response.json({ error: 'Unauthorized' }, { status: 401 });
-
-  const { id } = await req.json();
-  const item = await db.query.items.findFirst({ where: eq(items.id, id) });
-
-  if (item.userId !== session.user.id) {
-    return Response.json({ error: 'Forbidden' }, { status: 403 });
-  }
-
-  await db.delete(items).where(eq(items.id, id));
-  return Response.json({ success: true });
-}
-```
-
-**Detection pattern:** DELETE/PUT handlers without `getSession`, `auth`, or ownership check.
-
----
-
-## Detection Checklist
-
-When reviewing AI-generated code, check for these patterns:
-
-```
-[ ] useState without persistence mechanism
-[ ] await/fetch without try/catch
-[ ] console.log in onClick handlers
-[ ] Button onClick without disabled state
-[ ] delete/remove without confirmation/undo
-[ ] State update before await without rollback
-[ ] Data access without loading/error/empty checks
-[ ] Modal without onClose
-[ ] API DELETE/PUT without auth check
-```
+- [ ] State lost on page refresh
+- [ ] No feedback when actions fail
+- [ ] Buttons that appear active but do nothing
+- [ ] No loading or processing indicators
+- [ ] Delete actions without confirmation or undo
+- [ ] Success shown before server confirmation
+- [ ] No empty state when lists have no items
+- [ ] No error state when data fails to load
+- [ ] Modals with no way to close them
+- [ ] Destructive actions anyone can trigger
 
 ---
 
 ## Why AI Generates These Patterns
 
-1. **Training data bias:** Most code examples are minimal demos, not production code
+1. **Training data bias:** Most code examples are minimal demos, not production interfaces
 2. **Context window limits:** Error handling is "extra" that gets trimmed
 3. **Happy path prompts:** "Build a todo app" doesn't mention error handling
 4. **Speed optimization:** Shorter = faster generation = better benchmarks
 
-The skill of building robust software is in knowing what the demo code left out.
+The skill of building robust software is knowing what the demo version left out.

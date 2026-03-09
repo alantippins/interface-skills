@@ -23,18 +23,6 @@ Users will make mistakes. They delete the wrong thing, edit when they meant to v
 | State changes reversible | History/undo mechanism for important changes |
 | Archive over delete | Soft delete when permanent removal isn't required |
 
-### Detection Patterns
-
-```javascript
-// 🔴 Dangerous - no safeguard
-onClick={() => deleteItem(id)}
-onClick={() => removeUser(userId)}
-
-// ✅ Better - has protection
-onClick={() => setShowDeleteConfirm(true)}
-onClick={() => handleDeleteWithUndo(id)}
-```
-
 ### Severity
 
 | Situation | Severity |
@@ -62,22 +50,6 @@ Users aren't careful. They double-click, fat-finger, paste wrong values, forget 
 | Input parsing permissive | Accept variations, normalize internally |
 | Forms preserve on error | Don't clear data after API failure |
 
-### Detection Patterns
-
-```javascript
-// 🔴 Dangerous - double-submit possible
-<button onClick={submitForm}>Submit</button>
-
-// ✅ Better - disabled during processing
-<button onClick={submitForm} disabled={isLoading}>Submit</button>
-
-// 🔴 Dangerous - clears form on error
-.catch(() => setFormData({}))
-
-// ✅ Better - preserves input
-.catch((err) => setError(err.message))
-```
-
 ---
 
 ## Law of Persistence
@@ -96,16 +68,6 @@ Lost work is the deepest betrayal. Users invest time and attention. When the app
 | State survives refresh | Not just React state |
 | Failed submissions preserve input | Don't clear form on API error |
 | Unsaved changes warning | `onbeforeunload` or router guards |
-
-### Detection Patterns
-
-```javascript
-// 🟡 Risky - state lost on refresh
-const [formData, setFormData] = useState({});
-
-// ✅ Better - persisted
-const [formData, setFormData] = useLocalStorage('draft', {});
-```
 
 ---
 
@@ -126,22 +88,6 @@ Users shouldn't have to guess what happened, what's happening, or what will happ
 | Pending states visible | Loading indicators, disabled states |
 | Sync status shown | "Saved" / "Saving..." / "Offline" |
 
-### Detection Patterns
-
-```javascript
-// 🔴 Dangerous - silent failure
-.catch(console.log)
-.catch(() => {})
-
-// 🔴 Dangerous - no feedback
-await saveData(data);
-// ...nothing visible happens
-
-// ✅ Better
-await saveData(data);
-toast.success('Changes saved');
-```
-
 ---
 
 ## Law of Escape
@@ -161,24 +107,6 @@ Trapped users become angry users. Whether it's a modal, a wizard, or a process t
 | Browser back works | Proper history management |
 | Onboarding skippable | Skip option available |
 
-### Detection Patterns
-
-```javascript
-// 🔴 Missing escape
-<Modal>
-  <form onSubmit={submit}>
-    <button type="submit">Submit</button>
-    // No close button, no onClose prop
-  </form>
-</Modal>
-
-// ✅ Better
-<Modal onClose={handleClose} closeOnEsc closeOnOverlayClick>
-  <button type="button" onClick={handleClose}>Cancel</button>
-  <button type="submit">Submit</button>
-</Modal>
-```
-
 ---
 
 ## Law of Consistency
@@ -197,26 +125,6 @@ Users build mental models. When a swipe deletes in one place and archives in ano
 | Internal consistency | Same gesture/action = same result everywhere in the app |
 | Icon meanings | Trash means delete everywhere, not archive in one place |
 | Terminology | Same words for same concepts throughout |
-
-### Detection Patterns
-
-```javascript
-// 🟡 Inconsistent - swipe does different things
-// In EmailList: swipe left = delete
-// In TaskList: swipe left = complete
-// Pick one meaning per gesture
-
-// 🟡 Inconsistent - different confirmation patterns
-// Screen A: delete immediately
-// Screen B: confirmation dialog
-// Screen C: undo toast
-// Pick one and use it everywhere
-
-// 🔴 Platform violation
-// Custom gestures that conflict with system gestures
-// Non-standard icons for standard actions
-// Ignoring platform navigation patterns
-```
 
 ### Severity
 
@@ -259,20 +167,6 @@ The trap is thinking some decisions are creative and others are structural. Ever
 | Depth strategy consistent | ONE approach: borders-only, subtle shadows, layered, or surface shifts |
 | Details finished | Hover states, focus rings, transitions polished |
 
-### Detection Patterns
-
-```css
-/* 🟡 Unexamined defaults */
-font-family: system-ui, sans-serif; /* Was this chosen or never changed? */
-color: #333; /* Generic, no system */
-padding: 13px 17px; /* Arbitrary, no scale */
-
-/* ✅ Intentional choices */
-font-family: var(--font-body); /* Part of a system */
-color: var(--text-primary); /* Semantic token */
-padding: var(--space-3) var(--space-4); /* On a scale */
-```
-
 ### Quality Tests
 
 Run these during review:
@@ -311,21 +205,6 @@ Memory is unreliable. When users have to remember commands, navigate without lan
 | Options discoverable | Common actions visible, not buried in menus |
 | Context preserved | Return to where they left off |
 | Search over navigation | Let users find instead of browse for large sets |
-
-### Detection Patterns
-
-```javascript
-// 🟡 Requires recall
-// Keyboard-only commands with no menu equivalent
-// Features only accessible if you know they exist
-// No search in apps with lots of content
-
-// ✅ Supports recognition
-// Recent files, recent searches, recent contacts
-// Command palette that shows available actions
-// Breadcrumbs showing where you are
-// Suggestions based on context
-```
 
 ### Severity
 
