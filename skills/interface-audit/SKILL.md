@@ -30,11 +30,11 @@ Teaching-first codebase review. Verbose explanations that help users learn the p
 
 Before auditing, load these principles:
 
-**Interaction (Five Laws):** See `principles/interaction.md`
-- Reversibility, Forgiveness, Persistence, Transparency, Escape
+**Interaction:** See `principles/interaction.md`
+- Reversibility, Forgiveness, Persistence, Transparency, Escape, Consistency, Craft, Recognition
 
 **Visual:** See `principles/visual.md`
-- States, Accessibility, Hierarchy, Layout, Motion
+- States, Accessibility, Hierarchy, Layout, Motion, Depth Strategy, Text Hierarchy
 
 **AI Anti-patterns:** See `heuristics/ai-antipatterns.md`
 - Common issues in AI-generated code
@@ -77,6 +77,23 @@ Scan code for pattern violations. Use grep/search for:
 **Escape:**
 - `<Modal` without `onClose` prop
 - Multi-step without back/cancel
+
+**Consistency:**
+- Same action with different behavior in different files
+- Custom icons for standard actions (non-standard trash, edit, close)
+- Platform-specific patterns on wrong platform
+
+**Craft:**
+- Hardcoded hex colors (`#3b82f6`) instead of tokens (`var(--primary)`)
+- System fonts with no override (`font-family: system-ui`)
+- Arbitrary spacing values (`padding: 13px 17px`) instead of scale
+- Mixed depth strategies (borders AND shadows on same surface)
+- Missing hover/focus states on interactive elements
+
+**Recognition:**
+- No recent items in content-heavy views
+- Hidden actions requiring memorization
+- No search in apps with many items
 
 ---
 

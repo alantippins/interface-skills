@@ -85,14 +85,43 @@ The #1 gap in vibe-coded work. If it fetches data or takes action, it needs stat
 | Squint test passes | 🟡 | Blur vision; hierarchy still perceivable |
 | Headlines have presence | 🟢 | Weight + tight tracking |
 
-### Layering
+### Layering & Depth
+
+**Pick ONE depth strategy and commit:**
+
+| Strategy | Feel | When to Use |
+|----------|------|-------------|
+| Borders-only | Clean, technical | Dense tools, data-heavy interfaces |
+| Subtle shadows | Soft lift | Approachable products |
+| Layered shadows | Premium, dimensional | Cards that need presence |
+| Surface color shifts | Background tints | Hierarchy without shadows |
+
+**Anti-pattern:** Mixing approaches. Don't use borders AND dramatic shadows.
 
 | Check | Severity | What to Look For |
 |-------|----------|------------------|
-| Subtle elevation shifts | 🟡 | Lightness changes, not color jumps |
-| Inputs darker than surroundings | 🟡 | Signals interactivity |
-| Single depth strategy | 🟡 | Borders OR shadows OR elevation; don't mix |
+| Single depth strategy | 🟡 | ONE approach throughout, not mixed |
+| Subtle elevation shifts | 🟡 | Lightness changes of a few percentage points, not dramatic jumps |
+| Sidebars same bg as canvas | 🟡 | Subtle border separation, not different colors |
+| Inputs darker than surroundings | 🟡 | Inset feel signals "type here" |
 | Dropdowns above parent surface | 🟢 | One level up in elevation |
+
+### Text Hierarchy
+
+Build four levels, not two:
+
+| Level | Role | Example Use |
+|-------|------|-------------|
+| Primary | Default text | Body copy, main content |
+| Secondary | Supporting text | Descriptions, help text |
+| Tertiary | Metadata | Timestamps, counts, labels |
+| Muted | Disabled/placeholder | Inactive states, hints |
+
+| Check | Severity | What to Look For |
+|-------|----------|------------------|
+| Four text levels defined | 🟡 | Not just "text" and "gray text" |
+| Levels used consistently | 🟡 | Same level = same meaning throughout |
+| Hierarchy visible without color | 🟡 | Weight and size create hierarchy, not just color |
 
 ---
 
@@ -161,23 +190,32 @@ Patterns that signal amateur work. Presence of these = immediate warning or bloc
 
 ### Visual (🟡 Warnings)
 
-- Harsh borders demanding attention
-- Dramatic surface lightness jumps
+- Harsh borders — if borders are the first thing you see, they're too strong
+- Dramatic surface lightness jumps — elevation changes should be whisper-quiet
 - Pure white cards on colored backgrounds
 - Decorative gradients (unless intentional brand)
-- Multiple hues across surfaces (keep hue, shift lightness)
+- Multiple hues across surfaces — keep hue, shift only lightness
 - Large radius on small elements
 - Glow effects as primary affordances
-- Emoji instead of consistent icon set (🟢)
+- Different colors for sidebar vs canvas — use same bg with subtle border
 
 ### Structural
 
 - Missing interaction states (🔴)
 - Missing data states (loading/empty/error) (🔴)
-- Mixed depth strategies (🟡)
+- Mixed depth strategies — borders AND shadows (🟡)
 - Dramatic drop shadows (🟡)
-- Inconsistent spacing (🟡)
+- Inconsistent spacing — the clearest sign of no system (🟡)
 - Multiple accent colors competing (🟡)
+- Only two text hierarchy levels (🟡)
+
+### Craft
+
+- Hardcoded hex colors instead of tokens (🟡)
+- Default fonts never changed (🟡)
+- Arbitrary spacing values with no scale (🟡)
+- Token names that could belong to any project (🟢)
+- Missing polish — no hover, focus, or transition states (🟡)
 
 ---
 

@@ -1,11 +1,11 @@
 ---
 name: interface-plan
-description: Surface interaction concerns before you build. Asks the questions that prevent undo headaches later.
+description: Surface interaction and craft concerns before you build. Asks the questions that prevent headaches later.
 ---
 
 # Interface Plan
 
-Question-driven spec refinement. Use **before** building to surface interaction concerns early.
+Question-driven spec refinement. Use **before** building to surface interaction and craft concerns early.
 
 ---
 
@@ -27,13 +27,16 @@ Question-driven spec refinement. Use **before** building to surface interaction 
 
 ## Principles Reference
 
-Before asking questions, understand the Five Laws of Interaction Safety:
+Before asking questions, understand the Laws of Interface Quality:
 
 1. **Reversibility** — Every action should be undoable or recoverable
 2. **Forgiveness** — Software should assume human error and prevent harm
 3. **Persistence** — User work should survive navigation, refresh, failure, and closing
 4. **Transparency** — System state should be visible and understandable at all times
 5. **Escape** — Users should always have a way out of any state
+6. **Consistency** — The same action should work the same way everywhere
+7. **Craft** — The interface should show intentional choices, not defaults
+8. **Recognition** — Show users what they need, don't make them remember
 
 See `principles/interaction.md` for full details.
 
@@ -41,7 +44,39 @@ See `principles/interaction.md` for full details.
 
 ## Question Framework
 
-For each feature, work through these categories:
+For each feature, work through these categories.
+
+### Intent Questions (ask first)
+
+Before any implementation questions, establish intent:
+
+- **Who is this human?** Not "users." The actual person. Where are they when they open this? What's on their mind?
+- **What must they accomplish?** Not "use the feature." The verb. What action, what outcome?
+- **What should this feel like?** Say it in words that mean something. "Clean and modern" means nothing. Warm like a notebook? Cold like a terminal? Dense like a trading floor? Calm like a reading app?
+
+If you can't answer these with specifics, ask the user. Don't guess.
+
+### Craft Questions (decisions to make early)
+
+These decisions shape everything downstream. Make them explicit:
+
+- **Depth strategy:** Borders-only, subtle shadows, layered shadows, or surface color shifts? Pick ONE.
+- **Typography:** What typeface fits the feel? Don't default — select.
+- **Color temperature:** Warm, cool, neutral? What colors exist in this product's world?
+- **Information density:** Spacious or dense? What serves the user's task?
+
+### Where Defaults Hide
+
+Defaults sneak into these areas. Name them before they win:
+
+| Area | The Trap | Ask Instead |
+|------|----------|-------------|
+| Typography | "Pick something readable" | What typeface fits this product's personality? |
+| Navigation | "Build sidebar, add links" | How should users think about this space? |
+| Data display | "Show the number" | What does this number mean? What will they do with it? |
+| Token names | "Implementation detail" | Do these names evoke the product or a template? |
+
+---
 
 ### Reversibility Questions
 - Will users need to recover deleted items? How long should recovery be available?
@@ -68,6 +103,16 @@ For each feature, work through these categories:
 - If there's a modal, how do they close it?
 - For multi-step flows, can they go back?
 
+### Consistency Questions
+- Does this action work the same way elsewhere in the app?
+- Are we following platform conventions (iOS/Android/web)?
+- Will users expect this to behave like similar features they've used?
+
+### Recognition Questions
+- Can users see their options, or must they remember commands?
+- Should we show recent items, suggestions, or search?
+- How do users find this feature if they forget where it is?
+
 ---
 
 ## Output Format
@@ -77,8 +122,15 @@ Return a refined spec that includes:
 ```markdown
 ## Feature: [Name]
 
-### User Intent
-[What they want to accomplish]
+### Intent
+- **Who:** [The actual person using this]
+- **Task:** [What they must accomplish]
+- **Feel:** [How it should feel — specific, not generic]
+
+### Craft Decisions
+- **Depth:** [borders-only / subtle shadows / layered / surface shifts]
+- **Typography:** [Selected typeface and why]
+- **Density:** [spacious / balanced / dense]
 
 ### Happy Path
 [Normal flow]
@@ -100,6 +152,9 @@ Return a refined spec that includes:
 
 **Escape:**
 - [How users can exit any state]
+
+**Consistency:**
+- [How this matches existing patterns]
 
 ### Questions Still Open
 - [Anything that needs user decision]

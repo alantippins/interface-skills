@@ -1,6 +1,6 @@
 ---
 name: interface-teach
-description: Learn the Five Laws of interaction safety with examples and explanations.
+description: Learn the Laws of interface quality with examples and explanations.
 ---
 
 # Interface Teach
@@ -25,13 +25,16 @@ User asks about a principle → Full lesson with examples, counter-examples, and
 
 ## Principles Reference
 
-The Five Laws of Interaction Safety:
+The Laws of Interface Quality:
 
 1. **Reversibility** — Every action should be undoable or recoverable
 2. **Forgiveness** — Software should assume human error and prevent harm
 3. **Persistence** — User work should survive navigation, refresh, failure, and closing
 4. **Transparency** — System state should be visible and understandable at all times
 5. **Escape** — Users should always have a way out of any state
+6. **Consistency** — The same action should work the same way everywhere
+7. **Craft** — The interface should show intentional choices, not defaults
+8. **Recognition** — Show users what they need, don't make them remember
 
 See `principles/interaction.md` for full details.
 

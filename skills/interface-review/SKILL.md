@@ -21,7 +21,7 @@ Terse PR comments. Actionable findings for code review, not teaching.
 
 Before reviewing, know the principles:
 
-**Interaction (Five Laws):** See `principles/interaction.md`
+**Interaction:** See `principles/interaction.md`
 **Visual:** See `principles/visual.md`
 
 ---
@@ -31,7 +31,7 @@ Before reviewing, know the principles:
 ```markdown
 ## UX Review
 
-### Interaction Check
+### Interaction
 
 ⚠️ **Reversibility** — `src/components/ItemCard.tsx:42`
    Delete without undo. Add confirmation or soft delete.
@@ -44,8 +44,9 @@ Before reviewing, know the principles:
 
 ✓ **Transparency** — Error states show actionable messages
 ✓ **Escape** — Modal has close button and ESC handler
+✓ **Consistency** — Delete behavior matches other screens
 
-### Visual Check
+### Visual
 
 ⚠️ **States** — `src/components/UserList.tsx:23`
    No empty state. Show guidance when list is empty.
@@ -55,6 +56,16 @@ Before reviewing, know the principles:
 
 ✓ **Motion** — prefers-reduced-motion respected
 ✓ **Layout** — Consistent spacing throughout
+
+### Craft
+
+⚠️ **Tokens** — `src/components/Card.tsx:12`
+   Hardcoded colors (#3b82f6). Use design tokens.
+
+⚠️ **Depth** — `src/components/Modal.tsx:8`
+   Mixed strategies: borders AND shadows. Pick one.
+
+✓ **Polish** — Hover and focus states present
 ```
 
 ---
@@ -80,6 +91,8 @@ Before reviewing, know the principles:
 | Persistence | Important state survives refresh |
 | Transparency | try/catch on async, errors explain next steps |
 | Escape | Modals closeable, flows have back/cancel |
+| Consistency | Same action = same behavior everywhere |
+| Recognition | Options visible, not hidden behind memorization |
 
 ### Visual (from visual principles)
 
@@ -90,6 +103,15 @@ Before reviewing, know the principles:
 | Hierarchy | Consistent typography, single accent |
 | Layout | Consistent spacing, proper mobile handling |
 | Motion | reduced-motion respected, compositor props only |
+
+### Craft (from visual principles)
+
+| Check | Pass/Fail Criteria |
+|-------|-------------------|
+| Tokens | Colors/spacing use tokens, not hardcoded values |
+| Depth | ONE strategy (borders OR shadows), not mixed |
+| Text hierarchy | Four levels defined, used consistently |
+| Polish | Hover, focus, transition states present |
 
 ---
 

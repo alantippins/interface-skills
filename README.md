@@ -30,9 +30,9 @@ git clone https://github.com/alantippins/interface-skills.git
 npx @anthropic-ai/claude-code skills add ./interface-skills
 ```
 
-## The Five Laws
+## The Laws
 
-I've distilled the interaction patterns that matter most into five laws. Not abstract principles — concrete questions you can check against any feature.
+What makes software feel solid, intentional, and trustworthy. Concrete questions you can check against any feature.
 
 | Law | The Question |
 |-----|--------------|
@@ -41,8 +41,11 @@ I've distilled the interaction patterns that matter most into five laws. Not abs
 | **Persistence** | Does user work survive refresh, failure, or closing? |
 | **Transparency** | Do users always know what's happening? |
 | **Escape** | Can users always get out of any state? |
+| **Consistency** | Does the same action work the same way everywhere? |
+| **Craft** | Does the interface show intentional choices, not defaults? |
+| **Recognition** | Can users see what they need, or must they remember? |
 
-Each one maps to specific code patterns. Reversibility means checking whether your delete handler has a confirmation, undo toast, or soft delete. The principle names the problem. The pattern tells you what to fix.
+Each one maps to specific code and design patterns. The principle names the problem. The pattern tells you what to fix.
 
 ## How the Skills Work
 

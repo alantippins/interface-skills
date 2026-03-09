@@ -1,6 +1,6 @@
-# The Five Laws of Interaction Safety
+# The Laws of Interface Quality
 
-What should happen when users make mistakes, things fail, or context changes.
+What makes software feel solid, intentional, and trustworthy.
 
 Severity: 🔴 Blocker | 🟡 Warning | 🟢 Suggestion
 
@@ -178,6 +178,162 @@ Trapped users become angry users. Whether it's a modal, a wizard, or a process t
   <button type="submit">Submit</button>
 </Modal>
 ```
+
+---
+
+## Law of Consistency
+
+**The same action should work the same way everywhere.**
+
+Users build mental models. When a swipe deletes in one place and archives in another, the model breaks. When your app works differently than every other app on the platform, users stumble. Consistency lets users transfer what they've learned.
+
+**What violation feels like:** "Wait, why didn't that work?" "This button did something different last time." "This doesn't feel like an iPhone app."
+
+### What to Check
+
+| Check | What to Look For |
+|-------|------------------|
+| Platform conventions | iOS patterns on iOS, Android on Android, web standards on web |
+| Internal consistency | Same gesture/action = same result everywhere in the app |
+| Icon meanings | Trash means delete everywhere, not archive in one place |
+| Terminology | Same words for same concepts throughout |
+
+### Detection Patterns
+
+```javascript
+// 🟡 Inconsistent - swipe does different things
+// In EmailList: swipe left = delete
+// In TaskList: swipe left = complete
+// Pick one meaning per gesture
+
+// 🟡 Inconsistent - different confirmation patterns
+// Screen A: delete immediately
+// Screen B: confirmation dialog
+// Screen C: undo toast
+// Pick one and use it everywhere
+
+// 🔴 Platform violation
+// Custom gestures that conflict with system gestures
+// Non-standard icons for standard actions
+// Ignoring platform navigation patterns
+```
+
+### Severity
+
+| Situation | Severity |
+|-----------|----------|
+| Conflicts with platform conventions | 🔴 Blocker |
+| Same action behaves differently within app | 🟡 Warning |
+| Minor terminology inconsistencies | 🟢 Suggestion |
+
+---
+
+## Law of Craft
+
+**The interface should show intentional design choices, not unexamined defaults.**
+
+Generic interfaces feel cheap. Users notice when something was designed vs. assembled from defaults. Craft isn't about being flashy — it's about every choice being deliberate. A minimal interface can show craft. A complex one can lack it.
+
+**What violation feels like:** "This looks like a template." "This could be any app." "It works but feels unfinished."
+
+### Where Defaults Hide
+
+Defaults don't announce themselves. They disguise themselves as infrastructure — parts that feel like they "just need to work."
+
+| Area | The Trap | Reality |
+|------|----------|---------|
+| **Typography** | "Pick something readable, move on" | Typography IS your design. The weight of a headline, the personality of a label — these shape feel before anyone reads a word. |
+| **Navigation** | "Build the sidebar, get to real work" | Navigation IS your product. Where you are, where you can go, what matters most. A screen floating in space is a component demo, not software. |
+| **Data display** | "You have numbers, show numbers" | A number on screen is not design. What does it mean? What will they do with it? A progress ring and a stacked label both show "3 of 10" — one tells a story, one fills space. |
+| **Token names** | "Implementation detail" | Your CSS variables are design decisions. `--ink` and `--parchment` evoke a world. `--gray-700` and `--surface-2` evoke a template. |
+
+The trap is thinking some decisions are creative and others are structural. Everything is design. The moment you stop asking "why this?" is when defaults take over.
+
+### What to Check
+
+| Check | What to Look For |
+|-------|------------------|
+| Typography intentional | Fonts selected for purpose, not defaulted |
+| Color coherent | Defined palette with tokens, not random hex values |
+| Spacing systematic | Consistent scale (4px/8px), not arbitrary numbers |
+| Depth strategy consistent | ONE approach: borders-only, subtle shadows, layered, or surface shifts |
+| Details finished | Hover states, focus rings, transitions polished |
+
+### Detection Patterns
+
+```css
+/* 🟡 Unexamined defaults */
+font-family: system-ui, sans-serif; /* Was this chosen or never changed? */
+color: #333; /* Generic, no system */
+padding: 13px 17px; /* Arbitrary, no scale */
+
+/* ✅ Intentional choices */
+font-family: var(--font-body); /* Part of a system */
+color: var(--text-primary); /* Semantic token */
+padding: var(--space-3) var(--space-4); /* On a scale */
+```
+
+### Quality Tests
+
+Run these during review:
+
+**Swap Test**
+> Replace the typeface and colors with generic alternatives. Does it feel different?
+> If no → you defaulted. The design has no voice.
+
+**Token Test**
+> Are values hardcoded or using a system?
+> Hardcoded hex colors and pixel values = no design system.
+
+### Severity
+
+| Situation | Severity |
+|-----------|----------|
+| No design tokens, all hardcoded values | 🟡 Warning |
+| Missing hover/focus/transition states | 🟡 Warning |
+| Generic with no distinctive character | 🟢 Suggestion |
+
+---
+
+## Law of Recognition
+
+**Show users what they need — don't make them remember.**
+
+Memory is unreliable. When users have to remember commands, navigate without landmarks, or recall what they did last time, friction builds. Recognition is easy. Recall is hard. Show, don't tell.
+
+**What violation feels like:** "Where was that setting?" "What did I name that thing?" "How do I do that again?"
+
+### What to Check
+
+| Check | What to Look For |
+|-------|------------------|
+| Recent items visible | Show what they worked on last |
+| Options discoverable | Common actions visible, not buried in menus |
+| Context preserved | Return to where they left off |
+| Search over navigation | Let users find instead of browse for large sets |
+
+### Detection Patterns
+
+```javascript
+// 🟡 Requires recall
+// Keyboard-only commands with no menu equivalent
+// Features only accessible if you know they exist
+// No search in apps with lots of content
+
+// ✅ Supports recognition
+// Recent files, recent searches, recent contacts
+// Command palette that shows available actions
+// Breadcrumbs showing where you are
+// Suggestions based on context
+```
+
+### Severity
+
+| Situation | Severity |
+|-----------|----------|
+| Critical features only accessible via hidden gestures/shortcuts | 🔴 Blocker |
+| No recent items in content-heavy apps | 🟡 Warning |
+| No search in apps with 50+ items | 🟡 Warning |
 
 ---
 

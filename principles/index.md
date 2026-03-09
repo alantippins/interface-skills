@@ -51,7 +51,7 @@ One set of principles. Covers both visual craft and interaction safety.
 
 *How interfaces should behave.* See [interaction.md](./interaction.md) for details.
 
-### The Five Laws
+### The Laws
 
 | Law | Core Question |
 |-----|---------------|
@@ -60,6 +60,9 @@ One set of principles. Covers both visual craft and interaction safety.
 | **Persistence** | Does user work survive failure? |
 | **Transparency** | Do users always know what's happening? |
 | **Escape** | Can users always get out? |
+| **Consistency** | Does the same action work the same way everywhere? |
+| **Craft** | Does the interface show intentional choices? |
+| **Recognition** | Can users see what they need, not remember it? |
 
 ### Quick Checks
 
@@ -70,6 +73,9 @@ One set of principles. Covers both visual craft and interaction safety.
 | Persistence | Form state → survives refresh |
 | Transparency | Async operations → try/catch + feedback |
 | Escape | Modal → X + ESC + backdrop close |
+| Consistency | Same gesture → same result everywhere |
+| Craft | Design tokens → not hardcoded values |
+| Recognition | Recent items visible → no memorization required |
 
 ---
 
@@ -102,6 +108,16 @@ Patterns that signal amateur work:
 - No error handling on async
 - State only in React state
 - Modals without escape
+
+**Craft (🟡)**
+- Hardcoded colors/spacing instead of tokens
+- Default fonts never changed
+- Missing polish (hover, focus, transitions)
+
+**Consistency (🟡)**
+- Same action behaves differently in different places
+- Platform conventions ignored
+- Mixed terminology for same concepts
 
 ---
 
