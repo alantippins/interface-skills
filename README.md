@@ -1,11 +1,3 @@
-# Interface Skills
-
-Delete buttons with no undo. Forms that lose your work on refresh. Errors that say "Something went wrong" with no next step. Modals you can't escape.
-
-Sound familiar?
-
-These aren't bugs. They're gaps between "it works in the demo" and "it's ready for real users." After years of building design systems and shipping products, I kept seeing the same patterns slip through. So I turned them into skills.
-
 ## What This Is
 
 Four skills that surface interaction problems before users find them:
@@ -17,18 +9,6 @@ Four skills that surface interaction problems before users find them:
 | `/interface-review` | PR review | One-line comments with file:line references |
 | `/interface-teach` | Learning a principle | Full lesson with examples |
 
-### Audit vs Review — Which One?
-
-Both catch the same issues. The difference is **teaching vs shipping**.
-
-| | **Audit** | **Review** |
-|---|---|---|
-| **When** | Onboarding a codebase, teaching a team, first deep dive | Mid-PR, you know the principles, need the checklist |
-| **Output** | Multi-paragraph findings explaining *why* | One-line flags with file:line |
-| **Fixes** | Tiered (quick/better/best) | Single suggestion |
-| **Tone** | "Here's the principle and why it matters" | "Fix this" |
-
-Use **audit** when you want to learn or teach. Use **review** when verbose = ignored.
 
 ## Install
 
@@ -81,11 +61,9 @@ A few questions before we build:
 - What feedback after deletion? Toast? Animation?
 ```
 
-The goal isn't to slow you down. It's to make the decisions explicit *before* you're in the code and making assumptions.
-
 ### /interface-audit
 
-Teaching-first review. Every finding explains the principle behind it, so you learn as you fix.
+Teaching-first review. Every finding explains the principle behind it, so you can learn as you fix.
 
 ```
 > /interface-audit src/components/
@@ -112,7 +90,7 @@ The tiered fixes let you pick based on how much you want to invest. Sometimes a 
 
 ### /interface-review
 
-Terse output for PR review. When you already know the principles and just need the findings.
+Quick output for PR review. When you already know the principles and just need the review.
 
 ```markdown
 ## UX Review
@@ -143,19 +121,6 @@ They double-check obsessively. Every interaction carries risk.
 
 When actions are reversible, users gain confidence. They explore freely...
 ```
-
-## What These Skills Catch
-
-The same gaps I keep seeing:
-
-- **Delete without recovery** — No confirmation, undo, or trash
-- **State that doesn't persist** — Form data lost on refresh
-- **Silent async failures** — No try/catch, no user feedback
-- **Double-submit possible** — Buttons not disabled during loading
-- **No escape from modals** — Missing close button, ESC handler
-- **Placeholder handlers** — Buttons that `console.log` instead of acting
-
-See [heuristics/ai-antipatterns.md](./heuristics/ai-antipatterns.md) for the full list with code examples.
 
 ## Try It
 
