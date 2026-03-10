@@ -46,7 +46,7 @@ Triggers when ANY of these are present:
 Load and follow [critique.md](critique.md) for the review methodology.
 
 **For specific checks, reference:**
-- [checklists.md](references/checklists.md) — States, accessibility, hierarchy, layout, motion, mobile, red flags
+- [checklists.md](references/checklists.md) — Visual coherence, states, accessibility, hierarchy, layout, motion, mobile, red flags
 - [interaction.md](references/interaction.md) — The 8 Laws of Interface Quality
 
 ---
@@ -64,6 +64,17 @@ Load and follow [critique.md](critique.md) for the review methodology.
 - 🔴 **Blocker** — Data loss, no escape, accessibility blockers
 - ⚠️ **Warning** — Missing safeguards, craft issues
 - 🟢 **Polish** — Minor improvements
+
+### Composition
+
+| Check | What to Look For |
+|-------|------------------|
+| Color strategy | Count colors; do they reinforce or fragment? |
+| Type stack | Clear levels, one hero size |
+| Depth approach | ONE strategy (borders OR shadows), not mixed |
+| Entry point | One focal point, not everything competing |
+| Density | Matches context and user frequency |
+| Sequence | Clear visual path through the interface |
 
 ### The Laws
 
