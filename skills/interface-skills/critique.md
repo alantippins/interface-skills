@@ -1,11 +1,21 @@
 # Critique Methodology
 
-Systematic interface critique. Works on code, screenshots, or both.
+Surface interface quality concerns. Works on anything: code, screenshots, specs, plans.
 
 **Reference files:**
 
 - [checklists.md](references/checklists.md) — Technical checks (states, accessibility, visual coherence, mobile, red flags)
-- [interaction.md](references/interaction.md) — The 8 Laws of Interface Quality
+- [interaction.md](references/interaction.md) — Principles of Interface Quality
+
+---
+
+## Detect Input Type
+
+**Artifact** (code, screenshot, live URL) → Critique what exists. Output: findings, opportunities.
+
+**Spec/Plan** (feature description, Claude Code plan, PRD, user story) → Surface what's unaddressed. Output: questions, gaps.
+
+The principles and lenses apply to both. The output format adapts.
 
 ---
 
@@ -18,6 +28,8 @@ Systematic interface critique. Works on code, screenshots, or both.
 **Both:** Cross-reference — "code does X but visually Y"
 
 **Live URL:** Use WebFetch for markup, combine with screenshots.
+
+**Spec/Plan:** Read the description, surface interaction concerns that haven't been addressed.
 
 ---
 
@@ -76,7 +88,7 @@ Now look at the interface as a system of attention and flow.
 
 This is where the interface becomes a conversation. Does it help the user do their job, or does it make them work around it? Does it speak their language or system language? Can they tell what's clickable? Do they know what state they're in?
 
-**The Laws.** These are principles to hold while looking, not boxes to check. See [interaction.md](references/interaction.md) for the full framework. The short version:
+**The Principles.** These are principles to hold while looking, not boxes to check. See [interaction.md](references/interaction.md) for the full framework. The short version:
 
 - **Reversibility** — Can I undo what I just did? Confident users are users who can recover from mistakes.
 - **Forgiveness** — Does it prevent errors before they happen? A disabled button during submission, a confirmation before delete.
@@ -87,7 +99,7 @@ This is where the interface becomes a conversation. Does it help the user do the
 - **Craft** — Are these intentional choices or unexamined defaults?
 - **Recognition** — Are options visible, or do I have to remember them?
 
-Not every Law applies to every interface. A static marketing page doesn't need Persistence. A checkout flow needs all of them. Use judgment.
+Not every principle applies to every interface. A static marketing page doesn't need Persistence. A checkout flow needs all of them. Use judgment.
 
 **Motion.** If there's animation, is it earning its place? Motion should clarify, not decorate. And users should never wait for an animation to finish before they can act.
 
@@ -113,7 +125,7 @@ Does the interface feel like one designer made it, or like it was assembled from
 
 ### Flow Coherence
 
-*This lens applies when reviewing multiple screens or a sequence.*
+_This lens applies when reviewing multiple screens or a sequence._
 
 Flows have their own logic. Do the screens connect naturally — is the path obvious, or does the user have to figure out where they are? Does data persist across steps, or do they re-enter information? Do they know where they are in the process (step 2 of 4) and how much is left?
 
@@ -149,7 +161,7 @@ Write each section as narrative prose with bolded issue names, not bulleted chec
 
 ### Interaction
 
-[The Laws — but only the ones that matter for this interface. Skip what doesn't apply. For each relevant Law, what's the finding?]
+[The Principles — but only the ones that matter for this interface. Skip what doesn't apply. For each relevant principle, what's the finding?]
 
 ### Craft
 
@@ -193,56 +205,77 @@ For interface design issues, prefer opportunity framing. "We're missing an oppor
 
 ## Voice
 
-The critique should read like a design conversation, not an audit checklist.
-
-### Lead with observation
-
-State what you see before judging it. "There are four background colors competing" comes before "this is fragmented." Let the reader see it too.
-
-### Name emotions precisely
-
-Not "confusing" — _what kind_ of confusing? "Overwhelmed," "uncertain," "under-whelmed," "lost," "no pull," "respect but not excitement," "correct without compelling," "calm competence." The specificity of the emotion is the quality of the insight.
-
-### Frame as opportunity
-
-"We're missing an opportunity to reward progress" lands differently than "progress feedback is missing." Both are true; one invites action.
-
-### Explore what great would look like
-
-Don't just identify gaps — imagine the possibilities. "High craft here would look like..." followed by 2-3 specific ideas. This is where critique becomes generative.
-
-### Write in prose, not bullets
-
-Narrative paragraphs with bolded issue names, not checklist items. The critique should flow like thinking, not scanning.
-
-### Be specific and quantitative
-
-Count elements. Name colors. Measure relative sizes. "14 distinct uses of purple" not "lots of purple." The precision earns trust.
-
-### Be direct without being cold
-
-Decisive: "This is overwhelming" not "might feel overwhelming." But pair directness with care — the goal is to make the work great, not to demonstrate cleverness.
-
-### Connect everything to the user
-
-Every observation should answer: "And that means the user feels...?" If you can't complete that sentence, the observation isn't ready.
+Follow the voice guidelines in [SKILL.md](SKILL.md#voice).
 
 ---
 
-### Don't
+## For Specs & Plans
 
-- **Hedge** — no "maybe," "perhaps," "it could be argued"
-- **Be vague** — no "feels off" without saying exactly what and why
-- **Prescribe without reasoning** — never "change X to Y" without the why
-- **Pad with praise** — if something works, say so specifically; don't manufacture positivity
-- **Write checklists** — think in compositions and relationships, not items to tick off
-- **Be cold** — technical accuracy without warmth misses the point
+When the input is a spec, plan, or feature description (not an artifact), shift from critique to question-surfacing.
 
----
+### Intent Questions (ask first)
 
-### Tone
+Before interaction questions, establish intent:
 
-A staff product designer helping/teaching someone that wants the interface to be awesome. Direct, honest, but wanting to help them. The goal is to just help the user see what you are seeing and improve their work.
+- **Who is this human?** Not "users." The actual person. Where are they when they open this? What's on their mind?
+- **What must they accomplish?** Not "use the feature." The verb. What action, what outcome?
+- **What should this feel like?** Say it in words that mean something. "Clean and modern" means nothing. Warm like a notebook? Cold like a terminal? Dense like a trading floor? Calm like a reading app?
+
+If the spec doesn't answer these with specifics, ask.
+
+### Craft Questions
+
+These decisions shape everything downstream. Surface them early:
+
+- **Depth strategy:** Borders-only, subtle shadows, layered shadows, or surface color shifts? Pick ONE.
+- **Typography:** What typeface fits the feel? Don't default — select.
+- **Color temperature:** Warm, cool, neutral? What colors exist in this product's world?
+- **Information density:** Spacious or dense? What serves the user's task?
+
+### Interaction Questions
+
+Work through each principle. Surface what's unaddressed:
+
+**Reversibility:** Can users recover from mistakes? Undo, trash, version history?
+
+**Forgiveness:** What happens on double-click? Bad input? Are destructive actions distinguishable from safe ones?
+
+**Persistence:** What survives refresh? Navigation? API failure? Is there autosave?
+
+**Transparency:** How will they know it worked? What does loading look like? What do errors show?
+
+**Escape:** Can they cancel at any point? Close modals? Go back in flows?
+
+**Consistency:** Does this work like similar actions elsewhere in the app? Platform conventions?
+
+**Recognition:** Are options visible or must they remember them?
+
+### Output Format for Specs
+
+```markdown
+## [Feature Name]
+
+### Questions
+
+**Intent:**
+- [Questions about who/what/feel if unclear]
+
+**Craft:**
+- [Decisions that need to be made early]
+
+**Interaction:**
+
+**Reversibility:**
+- [Questions about recovery]
+
+**Persistence:**
+- [Questions about state survival]
+
+[...etc, only principles that apply]
+
+### Suggestions
+[If you have enough context to suggest answers, offer them as defaults to accept or override]
+```
 
 ---
 

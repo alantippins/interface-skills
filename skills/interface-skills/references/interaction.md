@@ -1,4 +1,4 @@
-# The Laws of Interface Quality
+# The Principles of Interface Quality
 
 What makes software feel solid, intentional, and trustworthy.
 
@@ -6,7 +6,7 @@ Severity: 🔴 Blocker | 🟡 Warning | 🟢 Suggestion
 
 ---
 
-## Law of Reversibility
+## Reversibility
 
 **Every action should be undoable or recoverable.**
 
@@ -33,7 +33,7 @@ Users will make mistakes. They delete the wrong thing, edit when they meant to v
 
 ---
 
-## Law of Forgiveness
+## Forgiveness
 
 **Software should assume human error and prevent harm.**
 
@@ -52,7 +52,7 @@ Users aren't careful. They double-click, fat-finger, paste wrong values, forget 
 
 ---
 
-## Law of Persistence
+## Persistence
 
 **User work should survive navigation, refresh, failure, and closing.**
 
@@ -71,7 +71,7 @@ Lost work is the deepest betrayal. Users invest time and attention. When the app
 
 ---
 
-## Law of Transparency
+## Transparency
 
 **System state should be visible and understandable at all times.**
 
@@ -90,7 +90,7 @@ Users shouldn't have to guess what happened, what's happening, or what will happ
 
 ---
 
-## Law of Escape
+## Escape
 
 **Users should always have a way out of any state.**
 
@@ -109,7 +109,7 @@ Trapped users become angry users. Whether it's a modal, a wizard, or a process t
 
 ---
 
-## Law of Consistency
+## Consistency
 
 **The same action should work the same way everywhere.**
 
@@ -136,7 +136,7 @@ Users build mental models. When a swipe deletes in one place and archives in ano
 
 ---
 
-## Law of Craft
+## Craft
 
 **The interface should show intentional design choices, not unexamined defaults.**
 
@@ -189,7 +189,7 @@ Run these during review:
 
 ---
 
-## Law of Recognition
+## Recognition
 
 **Show users what they need — don't make them remember.**
 
@@ -216,9 +216,9 @@ Memory is unreliable. When users have to remember commands, navigate without lan
 
 ---
 
-## Related Laws (from Laws of UX)
+## Related Principles (from Laws of UX)
 
-These principles inform the eight core laws above.
+These inform the eight core principles above.
 
 ### Jakob's Law
 Users expect your app to work like others they've used.

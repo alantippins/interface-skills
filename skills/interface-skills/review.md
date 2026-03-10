@@ -1,59 +1,35 @@
-# Review Mode
+# Interface Skills
 
-Interface quality review. Works on code, screenshots, or both.
-
----
-
-## When to Use
-
-- Checking interface quality (any input)
-- PR review
-- Screenshot feedback
-- "What's wrong with this?"
-
----
-
-## Input Types
-
-**Code:** Read files, mentally render the interface from the code.
-
-**Screenshot:** View image, critique what you see directly.
-
-**Both:** Cross-reference — "code does X but visually Y"
-
----
-
-## Detect Review Type
-
-### Single Screen (Steps 0-6)
-- One screenshot
-- Single component or page
-- No navigation/routing involved
-
-### Flow Review (Steps 0-7)
-Triggers when ANY of these are present:
-- Multiple screenshots provided
-- Figma URL with multiple frames
-- User mentions "flow", "sequence", "steps", "journey", "wizard", "onboarding"
-- Code includes router, navigation, or multi-step state
-
-**When flow detected:** Add Step 7 (Flow Coherence) to the critique. Evaluate transitions, state continuity, progress indicators, and exit paths.
+Surface interface quality concerns. Works on anything.
 
 ---
 
 ## Process
 
-Load and follow [critique.md](critique.md) for the review methodology.
+Load and follow [critique.md](critique.md) for the full methodology.
 
-**For specific checks, reference:**
+**References:**
+
 - [checklists.md](references/checklists.md) — Visual coherence, states, accessibility, hierarchy, layout, motion, mobile, red flags
-- [interaction.md](references/interaction.md) — The 8 Laws of Interface Quality
+- [interaction.md](references/interaction.md) — Principles of Interface Quality
+
+---
+
+## Input Detection
+
+| Input                                | Output                        |
+| ------------------------------------ | ----------------------------- |
+| Code                                 | Critique the implementation   |
+| Screenshot                           | Critique the visual           |
+| Code + Screenshot                    | Cross-reference both          |
+| Spec / Plan / Feature description    | Surface unaddressed questions |
+| Multiple screens or "flow" mentioned | Add flow coherence lens       |
 
 ---
 
 ## Modifiers
 
-`--teach` — Add principle explanations to each finding. See critique.md output format.
+`--teach` — Add principle explanations to each finding.
 
 ---
 
@@ -62,8 +38,8 @@ Load and follow [critique.md](critique.md) for the review methodology.
 ### Severity
 
 - 🔴 **Blocker** — Data loss, no escape, accessibility blockers
-- ⚠️ **Warning** — Missing safeguards, craft issues
-- 🟢 **Polish** — Minor improvements
+- 🟡 **Warning** — Missing safeguards, craft issues
+- 🟢 **Suggestion** — Polish opportunities
 
 ### Composition
 
@@ -76,24 +52,14 @@ Load and follow [critique.md](critique.md) for the review methodology.
 | Density | Matches context and user frequency |
 | Sequence | Clear visual path through the interface |
 
-### The Laws
+### The Principles
 
-| Law | What to Look For |
-|-----|------------------|
-| Reversibility | Delete has safeguard |
-| Forgiveness | Submit disabled during async |
-| Persistence | State survives refresh |
-| Transparency | Actions confirm, errors explain |
-| Escape | Modals closeable, flows have back |
-| Consistency | Same action = same result |
-| Recognition | Options visible, not memorized |
-
-### Flow-Specific (Step 7)
-
-| Check | What to Look For |
-|-------|------------------|
-| Transition logic | Screens connect naturally |
-| State continuity | Data persists across steps |
-| Progress clarity | User knows where they are |
-| Exit paths | Can abandon at any point |
-| Error recovery | Can resume after failure |
+| Principle     | What to Look For                  |
+| ------------- | --------------------------------- |
+| Reversibility | Delete has safeguard              |
+| Forgiveness   | Submit disabled during async      |
+| Persistence   | State survives refresh            |
+| Transparency  | Actions confirm, errors explain   |
+| Escape        | Modals closeable, flows have back |
+| Consistency   | Same action = same result         |
+| Recognition   | Options visible, not memorized    |
