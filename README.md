@@ -148,7 +148,7 @@ When technical issues appear:
 
 ## Foundation
 
-The methodology lives in `references/`:
+The methodology lives in `critique.md`. Deep-dive references in `references/`:
 
 - **interaction.md** — Principles of interface quality
 - **checklists.md** — Technical checks (states, accessibility, mobile, red flags)

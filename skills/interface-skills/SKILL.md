@@ -12,7 +12,7 @@ Surface interface quality concerns. Give it anything — code, screenshots, spec
 
 ## How It Works
 
-Load [review.md](review.md) for routing, then [critique.md](critique.md) for methodology.
+Load [critique.md](critique.md) for the full methodology.
 
 | Input            | Output                        |
 | ---------------- | ----------------------------- |
@@ -83,19 +83,4 @@ Every observation should answer: "And that means the user feels...?" If you can'
 
 ## Quick Reference
 
-### The Principles
-
-1. **Reversibility** — Every action should be undoable or recoverable
-2. **Forgiveness** — Software should assume human error and prevent harm
-3. **Persistence** — User work should survive navigation, refresh, failure, and closing
-4. **Transparency** — System state should be visible and understandable at all times
-5. **Escape** — Users should always have a way out of any state
-6. **Consistency** — The same action should work the same way everywhere
-7. **Craft** — The interface should show intentional design choices, not defaults
-8. **Recognition** — Show users what they need — don't make them remember
-
-### Severity
-
-- 🔴 **Blocker** — Data loss, no escape, crashes, accessibility blockers
-- 🟡 **Warning** — Missing safeguards with workarounds, craft issues
-- 🟢 **Suggestion** — Polish opportunities, minor consistency issues
+See [interaction.md](references/interaction.md) for the 8 principles and [checklists.md](references/checklists.md) for technical checks.
