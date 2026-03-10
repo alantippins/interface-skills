@@ -27,8 +27,6 @@ The principles and lenses apply to both. The output format adapts.
 
 **Both:** Cross-reference — "code does X but visually Y"
 
-**Live URL:** Use WebFetch for markup, combine with screenshots.
-
 **Spec/Plan:** Read the description, surface interaction concerns that haven't been addressed.
 
 ---
