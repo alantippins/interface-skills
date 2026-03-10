@@ -11,7 +11,7 @@ Surface interface quality concerns. Works on anything: code, screenshots, specs,
 
 ## Detect Input Type
 
-**Artifact** (code, screenshot, live URL) → Critique what exists. Output: findings, opportunities.
+**Artifact** (code, screenshot) → Critique what exists. Output: findings, opportunities.
 
 **Spec/Plan** (feature description, Claude Code plan, PRD, user story) → Surface what's unaddressed. Output: questions, gaps.
 
