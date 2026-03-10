@@ -1,33 +1,31 @@
-## What This Is
+# Interface Skills
 
-Four skills that surface interaction problems before users find them:
-
-| Skill | When to Use | Output |
-|-------|-------------|--------|
-| `/interface-plan` | Before building | Questions that prevent headaches later |
-| `/interface-audit` | Deep codebase review | Verbose findings with explanations + tiered fixes |
-| `/interface-review` | PR review | One-line comments with file:line references |
-| `/interface-teach` | Learning a principle | Full lesson with examples |
-
-
-## Install
+One skill, four modes. Surface interaction problems before users find them.
 
 ```bash
-# Interactive — choose which skills and agents
 npx skills add alantippins/interface-skills
-
-# Claude Code only
-npx skills add alantippins/interface-skills -a claude-code
-
-# Multiple specific agents
-npx skills add alantippins/interface-skills -a claude-code -a cursor -a windsurf
 ```
 
 Works with Claude Code, Cursor, Windsurf, and [40+ other agents](https://github.com/vercel-labs/skills).
 
+## Modes
+
+| Mode | When to Use | Invoke |
+|------|-------------|--------|
+| **plan** | Before building | `/interface-skills plan` |
+| **review** | PR review | `/interface-skills review` |
+| **audit** | Deep codebase check | `/interface-skills audit` |
+| **critique** | Screenshot/UI analysis | `/interface-skills critique` |
+
+Add `--teach` to review or audit for verbose explanations:
+```
+/interface-skills review --teach
+/interface-skills audit --teach
+```
+
 ## The Laws
 
-What makes software feel solid, intentional, and trustworthy. Concrete questions you can check against any feature.
+What makes software feel solid, intentional, and trustworthy.
 
 | Law | The Question |
 |-----|--------------|
@@ -40,16 +38,14 @@ What makes software feel solid, intentional, and trustworthy. Concrete questions
 | **Craft** | Does the interface show intentional choices, not defaults? |
 | **Recognition** | Can users see what they need, or must they remember? |
 
-Each one maps to specific code and design patterns. The principle names the problem. The pattern tells you what to fix.
+## Examples
 
-## How the Skills Work
-
-### /interface-plan
+### Plan Mode
 
 Before you write code, surface the decisions that need to happen.
 
 ```
-> /interface-plan "Add delete button to item cards"
+> /interface-skills plan "Add delete button to item cards"
 
 A few questions before we build:
 
@@ -61,36 +57,9 @@ A few questions before we build:
 - What feedback after deletion? Toast? Animation?
 ```
 
-### /interface-audit
+### Review Mode
 
-Teaching-first review. Every finding explains the principle behind it, so you can learn as you fix.
-
-```
-> /interface-audit src/components/
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🔴 BLOCKER: Delete without safeguard
-
-📍 src/components/ItemCard.tsx:42
-
-⚖️  PRINCIPLE: Law of Reversibility
-    Every action should be undoable or recoverable.
-
-    Users will make mistakes. When deletion is permanent
-    and instant, that one wrong click causes real harm.
-
-🔧 FIX:
-    Quick:  Add confirmation dialog
-    Better: Undo toast (delay deletion 5s)
-    Best:   Soft delete to trash
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
-
-The tiered fixes let you pick based on how much you want to invest. Sometimes a quick fix is fine. Sometimes you need the full solution.
-
-### /interface-review
-
-Quick output for PR review. When you already know the principles and just need the review.
+Quick output for PR review. Terse, actionable.
 
 ```markdown
 ## UX Review
@@ -104,29 +73,58 @@ Quick output for PR review. When you already know the principles and just need t
 ✓ **Escape** — Modal has close button and ESC handler
 ```
 
-### /interface-teach
+### Audit Mode
 
-Deep explanations when you want to understand a principle, not just fix a violation.
+Teaching-first review. Every finding explains the principle behind it.
 
 ```
-> /interface-teach Law of Reversibility
+> /interface-skills audit src/components/
 
-# Law of Reversibility
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🔴 BLOCKER: Delete without safeguard
 
-Every action should be undoable or recoverable.
+📍 src/components/ItemCard.tsx:42
 
-Users make mistakes. They click wrong, delete accidentally, submit early.
-When actions are irreversible, users develop anxiety. They hesitate.
-They double-check obsessively. Every interaction carries risk.
+⚖️  PRINCIPLE: Law of Reversibility
 
-When actions are reversible, users gain confidence. They explore freely...
+🔧 FIX:
+    Quick:  Add confirmation dialog
+    Better: Undo toast (delay deletion 5s)
+    Best:   Soft delete to trash
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+```
+
+With `--teach`, adds full principle explanations to each finding.
+
+### Critique Mode
+
+Visual analysis for screenshots and UI mockups.
+
+```
+> /interface-skills critique [paste screenshot]
+
+## Visual Critique
+
+### First Impression
+Clean structure with clear sections. Toggle states are ambiguous.
+
+### Opportunities
+
+🔴 **Critical:**
+- Toggle states indistinguishable — Add clear on/off colors
+
+🟡 **Important:**
+- Sidebar darker than content — Use same bg with border
+
+### Top 3 Actions
+1. Fix toggle states
+2. Add save feedback
+3. Balance sidebar weight
 ```
 
 ## Try It
 
-Install the skills, run `/interface-audit` on something you're building, and see what surfaces.
-
-If something's missing or doesn't match your workflow, let me know. These are patterns I've refined from my own work — I'm curious what breaks in yours.
+Install, run `/interface-skills audit` on something you're building, see what surfaces.
 
 ## License
 
