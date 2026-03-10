@@ -1,7 +1,7 @@
 ---
 name: interface-skills
-description: "Interface quality toolkit. Plan before building, review PRs, audit codebases, critique screenshots. Based on the Laws of Interface Quality."
-argument-hint: "[plan | review | audit | critique] [--teach]"
+description: "Interface quality toolkit. Plan before building, review interfaces. Based on the Laws of Interface Quality."
+argument-hint: "[plan | review] [--teach]"
 ---
 
 # Interface Skills
@@ -11,30 +11,31 @@ By Alan Tippins
 | Mode | When to Use | Invoke |
 |------|-------------|--------|
 | [Plan](plan.md) | Before building — surface concerns early | `/interface-skills plan` |
-| [Review](review.md) | PR review — terse, actionable | `/interface-skills review` |
-| [Audit](audit.md) | Full codebase check | `/interface-skills audit` |
-| [Critique](critique.md) | Screenshot/UI analysis | `/interface-skills critique` |
+| [Review](review.md) | Check interface quality | `/interface-skills review` |
+
+## Input
+
+Review accepts:
+- **Code** — analyze what the interface will be
+- **Screenshot** — analyze what the interface is
+- **Both** — comprehensive analysis
 
 ## Modifiers
 
-- `--teach` — Add principle explanations to findings. Works with review and audit.
-  - `/interface-skills review --teach` — PR review with learning
-  - `/interface-skills audit --teach` — Verbose teaching mode
+- `--teach` — Add principle explanations to findings
 
 ## Routing
 
 1. **plan** → Load [plan.md](plan.md)
-2. **review** → Load [review.md](review.md) (check for --teach flag)
-3. **audit** → Load [audit.md](audit.md) (check for --teach flag)
-4. **critique** or screenshot pasted → Load [critique.md](critique.md)
-5. **Ambiguous** → Ask which mode
+2. **review** → Load [review.md](review.md)
+3. **Screenshot pasted** → Load [review.md](review.md)
+4. **Ambiguous** → Ask which mode
 
 ## Foundation
 
 All modes reference shared principles in `references/`:
 - [references/interaction.md](references/interaction.md) — Laws of Interface Quality
-- [references/visual.md](references/visual.md) — Visual & Technical Principles
-- [references/heuristics.md](references/heuristics.md) — Universal UX Heuristics
+- [references/checklists.md](references/checklists.md) — States, accessibility, hierarchy, layout, motion, mobile
 
 ---
 

@@ -1,6 +1,6 @@
-# Universal UX Heuristics
+# Interface Checklists
 
-Rules that apply to any project. The baseline for "does this meet professional standards?"
+Consolidated quality checks. Single source of truth for visual, technical, and accessibility standards.
 
 Severity: 🔴 Blocker | 🟡 Warning | 🟢 Suggestion
 
@@ -48,7 +48,7 @@ The #1 gap in vibe-coded work. If it fetches data or takes action, it needs stat
 
 ---
 
-## Hierarchy & Layering
+## Hierarchy & Typography
 
 ### Typography
 - 🟡 **Four text levels max** — primary, secondary, tertiary, muted
@@ -58,16 +58,44 @@ The #1 gap in vibe-coded work. If it fetches data or takes action, it needs stat
 - 🟢 **Line length 65-75 chars** — Optimal readability
 - 🟢 **Line height 1.5-1.75** — Body text breathes
 
+### Text Hierarchy
+
+Build four levels, not two:
+
+| Level | Role | Example Use |
+|-------|------|-------------|
+| Primary | Default text | Body copy, main content |
+| Secondary | Supporting text | Descriptions, help text |
+| Tertiary | Metadata | Timestamps, counts, labels |
+| Muted | Disabled/placeholder | Inactive states, hints |
+
+- 🟡 **Four text levels defined** — Not just "text" and "gray text"
+- 🟡 **Levels used consistently** — Same level = same meaning throughout
+- 🟡 **Hierarchy visible without color** — Weight and size create hierarchy, not just color
+
 ### Visual Hierarchy
 - 🟡 **Single accent color per view** — One thing is primary
 - 🟡 **Gray for structure, color for meaning** — Status, action, emphasis only
 - 🟡 **Squint test passes** — Blur vision; hierarchy still perceivable
 - 🟢 **Headlines have presence** — Weight + tight tracking
 
-### Layering
-- 🟡 **Subtle elevation shifts** — Lightness changes, not color jumps
-- 🟡 **Inputs darker than surroundings** — Signals interactivity
-- 🟡 **Single depth strategy** — Borders OR shadows OR elevation; don't mix
+### Layering & Depth
+
+**Pick ONE depth strategy and commit:**
+
+| Strategy | Feel | When to Use |
+|----------|------|-------------|
+| Borders-only | Clean, technical | Dense tools, data-heavy interfaces |
+| Subtle shadows | Soft lift | Approachable products |
+| Layered shadows | Premium, dimensional | Cards that need presence |
+| Surface color shifts | Background tints | Hierarchy without shadows |
+
+**Anti-pattern:** Mixing approaches. Don't use borders AND dramatic shadows.
+
+- 🟡 **Single depth strategy** — ONE approach throughout, not mixed
+- 🟡 **Subtle elevation shifts** — Lightness changes of a few percentage points, not dramatic jumps
+- 🟡 **Sidebars same bg as canvas** — Subtle border separation, not different colors
+- 🟡 **Inputs darker than surroundings** — Inset feel signals "type here"
 - 🟢 **Dropdowns above parent surface** — One level up in elevation
 
 ---
@@ -129,15 +157,24 @@ Patterns that signal amateur work. Presence of these = immediate 🟡 or 🔴.
 - 🟡 Multiple hues across surfaces (keep hue, shift lightness)
 - 🟡 Large radius on small elements
 - 🟡 Glow effects as primary affordances
+- 🟡 Different colors for sidebar vs canvas
 - 🟢 Emoji instead of consistent icon set
 
 ### Structural
 - 🔴 Missing interaction states
 - 🔴 Missing data states (loading/empty/error)
-- 🟡 Mixed depth strategies
+- 🟡 Mixed depth strategies (borders AND shadows)
 - 🟡 Dramatic drop shadows
 - 🟡 Inconsistent spacing
 - 🟡 Multiple accent colors competing
+- 🟡 Only two text hierarchy levels
+
+### Craft
+- 🟡 Hardcoded hex colors instead of tokens
+- 🟡 Default fonts never changed
+- 🟡 Arbitrary spacing values with no scale
+- 🟡 Missing polish — no hover, focus, or transition states
+- 🟢 Token names that could belong to any project
 
 ---
 
@@ -153,7 +190,7 @@ AI generates interfaces that work in the happy path demo. It doesn't design for:
 - What happens when the network fails
 - What happens when users leave and come back
 
-### Quick Audit Checklist
+### Detection Checklist
 
 | Anti-Pattern | What Users Experience | Principle Violated |
 |--------------|----------------------|-------------------|
@@ -165,10 +202,8 @@ AI generates interfaces that work in the happy path demo. It doesn't design for:
 | Fake success | "It said it saved but my changes are gone" | Transparency |
 | Missing UI states | Crash on first load, blank on empty | Forgiveness |
 | Trapped states | "I can't close this popup" | Escape |
-| Unguarded critical endpoints | "My data was modified without my action" | Forgiveness |
 
-### Detection Checklist
-
+Quick checks:
 - [ ] State lost on page refresh
 - [ ] No feedback when actions fail
 - [ ] Buttons that appear active but do nothing
@@ -183,7 +218,7 @@ AI generates interfaces that work in the happy path demo. It doesn't design for:
 
 ## Quality Tests
 
-Run these manually or teach the agent to evaluate.
+Manual tests for craft. Run these during review.
 
 ### Swap Test
 > Would the design feel different if you replaced the typeface or layout with standard alternatives?

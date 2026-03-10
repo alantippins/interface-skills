@@ -1,264 +1,182 @@
-# Critique Mode
+# Critique Methodology
 
-Visual and screenshot analysis. Systematic UI review based on design principles.
+Systematic interface critique. Works on code, screenshots, or both.
 
----
-
-## When to Use
-
-- Screenshot pasted into conversation
-- User asks for visual feedback on a design
-- Reviewing a live UI or mockup
-- "What's wrong with this?" or "How can I improve this?"
+**Reference files:**
+- [checklists.md](references/checklists.md) — Technical checks (states, accessibility, mobile, red flags)
+- [interaction.md](references/interaction.md) — The 8 Laws of Interface Quality
 
 ---
 
-## How It Works
+## Input Modes
 
-1. **Context** — Understand what this is and who uses it
-2. **First impressions** — Gut reaction before analysis
-3. **Systematic review** — Walk through visual/interaction principles
-4. **Top opportunities** — Prioritized, actionable improvements
+**Screenshot:** View the image, critique what you see.
 
----
+**Code:** Read files, mentally render the interface. Focus on what's inferrable: structure, spacing, color, typography, hierarchy, component organization, interaction patterns.
 
-## Step 1: Context
+**Both:** Cross-reference — "code does X but visually Y"
 
-Before critiquing, establish:
-
-- **What is this?** — App type, screen purpose, platform
-- **Who uses it?** — User context, emotional state, task at hand
-- **What's the intent?** — What should users feel or accomplish here?
-
-If unclear, ask. Don't critique a login screen as if it were a dashboard.
+**Live URL:** Use WebFetch for markup, combine with screenshots.
 
 ---
 
-## Step 2: First Impressions
+## Critique Process
 
-Capture gut reaction (2-3 sentences):
+### Step 0: Context
 
-> On first glance, [what stands out]. The overall feel is [emotional impression].
-> [One thing that works] and [one thing that doesn't].
+Before critiquing:
+- **What is this?** — App type, screen purpose, target user
+- **What emotional context?** — Stressful? Casual? High-stakes? Routine?
 
-This isn't analysis yet — it's the immediate response a user would have.
+A divorce filing app demands different care than a podcast player.
 
----
+### Step 1: First Impressions
 
-## Step 3: Systematic Review
-
-Work through these categories. Reference [references/visual.md](references/visual.md) for details.
-
-### Visual Design
-
-**Color:**
-- Is there a coherent palette or random hex values?
-- Single accent color or multiple competing?
-- Gray for structure, color for meaning?
-- Sufficient contrast (4.5:1 minimum)?
-
-**Typography:**
-- Intentional font selection or system default?
-- Clear hierarchy (primary, secondary, tertiary, muted)?
-- Appropriate weight/size relationships?
-- Headings with presence (weight + tight tracking)?
-
-**Depth & Shadows:**
-- ONE consistent depth strategy?
-  - Borders-only
-  - Subtle shadows
-  - Layered shadows
-  - Surface color shifts
-- Or mixed approaches (anti-pattern)?
-
-**Spacing:**
-- Consistent base unit (4px/8px)?
-- Same gaps for same relationships?
-- Symmetrical padding by default?
-
-**Polish:**
-- Hover states visible?
-- Focus states present?
-- Transitions smooth?
-
-### Interface Design
-
-**States:**
-- Data states visible? (loading, empty, error, success)
-- Interaction states present? (default, hover, active, focus, disabled)
-- Disabled elements explain why?
-
-**Feedback:**
-- Actions confirm completion?
-- Loading indicators present?
-- Errors explain what to do?
-
-**Hierarchy:**
-- Clear visual priority?
-- One primary CTA per view?
-- Squint test passes?
-
-**Navigation:**
-- User knows where they are?
-- Clear paths forward and back?
-- Escape routes available?
-
-### Consistency & Conventions
-
-- Platform conventions followed?
-- Internal consistency (same action = same result)?
-- Standard icon meanings?
-- Terminology consistent?
-
-### User Context
-
-- Touch targets adequate (44px)?
-- Thumb zone awareness?
-- Appropriate for user's emotional state?
-- Cognitive load appropriate for task?
+One paragraph. Gut reaction. What stands out? What feels off? Be direct.
 
 ---
 
-## Step 4: Output Format
+## The Questions
+
+Work through these. Not every question applies to every interface — use judgment.
+
+### General
+
+- Is every element and decision intentional?
+- Is it easy to understand the design?
+- Are there paper cuts? Small issues that compound into negative experience.
+  - Empty space while loading, wrong icon placement, inconsistent hover states, missing tooltips, missing placeholders, inconsistent spacing across screens
+- Will it scale? What happens with more content, longer content, in-between states?
+- Is it focused on essentials? What can be removed to support primary goals?
+
+### Visual Style
+
+- Are style and visual techniques suited to the concept and problem?
+- Do colors, icons, and illustrations work together?
+- Do all elements look like they belong together, even different types?
+- Does typography support readability?
+
+### Layout
+
+- Does layout work across viewport sizes AND take unique advantage of each? (Not just "works at mobile" — does mobile get a better experience?)
+- Is it clear there's more content to scroll/move to?
+- Is the structure easy to understand?
+- Are related elements visually related through alignment, grouping, hierarchy?
+- Are visual relationships consistent throughout?
+
+### Composition & Hierarchy
+
+- Is attention drawn to important elements first?
+- Does composition guide the eye through the design?
+- Is density appropriate for context? (Office vs driving vs glancing)
+
+### Interaction
+
+Core questions:
+- Does it help the user do their job?
+- Does it speak user language, not system language?
+- Are patterns consistent throughout and with existing functionality?
+- Is it clear which elements are interactive?
+- Does it communicate current state well?
+
+**The Laws** — check these specifically (see [interaction.md](references/interaction.md) for depth):
+
+| Law | Question |
+|-----|----------|
+| **Reversibility** | Can I undo actions? Is there a way out? |
+| **Forgiveness** | Does it prevent mistakes? Handle errors gracefully? |
+| **Persistence** | Does work survive refresh, navigation, failure? |
+| **Transparency** | Do I get clear feedback? Do I know what's happening? |
+| **Escape** | Can I exit any state? Close modals? Cancel flows? |
+| **Consistency** | Same action = same result everywhere? |
+| **Craft** | Intentional choices or defaults? |
+| **Recognition** | Options visible, not memorized? |
+
+Animation & touch:
+- Are animations appropriate to concept?
+- Do I wait for animations to finish?
+- Does it support touch well?
+
+### Flow Coherence
+
+**When reviewing multiple screens or a sequence:**
+
+- Do screens connect naturally? Is the path obvious?
+- Does data persist across steps?
+- Does user know where they are in the flow?
+- Can user abandon/back out at any point?
+- If something fails mid-flow, can they resume?
+- Does the sequence tell a story?
+- What happens on refresh mid-flow? Deep-link to step 3?
+
+---
+
+## Output Format
 
 ```markdown
-## Visual Critique
+## Context
+[1-2 sentences on what this is and who it's for]
 
-### First Impression
-[2-3 sentences on gut reaction]
+## First Impressions
+[1 paragraph, direct]
 
-### What's Working
-- [Specific positive 1]
-- [Specific positive 2]
+## Findings
 
-### Opportunities
+### [Category]
+**[Issue]** — [Observation]. [Impact]. [Opportunity].
 
-**🔴 Critical:**
-- [Issue] — [Why it matters] — [Fix]
+[Group by: General, Visual, Layout, Composition, Interaction, Flow]
+[Include file:line for code issues]
 
-**🟡 Important:**
-- [Issue] — [Why it matters] — [Fix]
-
-**🟢 Polish:**
-- [Issue] — [Why it matters] — [Fix]
-
-### Top 3 Actions
-1. [Most impactful change]
-2. [Second priority]
-3. [Third priority]
+## Top Opportunities
+[3-5 highest-impact changes, ranked]
 ```
 
 ---
 
-## Voice Rules
+## Voice
 
-### Be Specific
-Not: "The typography could be better"
-Yes: "The body text is 14px Inter at regular weight — increasing to 16px and using -0.01em letter-spacing would improve readability"
+**Be:**
+- Specific — count things, name colors, cite lines
+- Decisive — "This is overwhelming" not "might feel overwhelming"
+- Impact-aware — connect observation to user effect
+- Constructive — every problem paired with opportunity
 
-### Be Decisive
-Not: "You might want to consider..."
-Yes: "Change this to..."
+**Don't:**
+- Hedge — no "maybe," "perhaps"
+- Be vague — no "feels off" without specifics
+- Prescribe without reasoning — never "change X to Y" without why
+- Pad with praise — if something works, say so specifically; don't manufacture positivity
 
-### Be Factual First
-Lead with observation, then interpretation:
-- "The submit button is the same size as cancel" (fact)
-- "This makes primary action unclear" (interpretation)
-
-### Critique the Work, Not the Person
-Not: "You didn't think about..."
-Yes: "This screen doesn't address..."
+**Tone:** Senior designer reviewing with a junior they respect. Direct, honest, wants the work to be great.
 
 ---
 
-## Common Patterns to Watch For
+## Severity
 
-### Visual Red Flags (🟡)
-- Harsh borders demanding attention
-- Dramatic surface lightness jumps
-- Pure white cards on colored backgrounds
-- Multiple hues across surfaces
-- Large radius on small elements
-- Glow effects as primary affordances
-- Different sidebar/canvas colors
+Order findings by impact:
 
-### Structural Red Flags (🔴/🟡)
-- Missing interaction states (🔴)
-- Missing data states (🔴)
-- Mixed depth strategies (🟡)
-- Inconsistent spacing (🟡)
-- Multiple competing accents (🟡)
-- Only two text hierarchy levels (🟡)
+1. **Structural** — Information architecture, missing functionality, wrong mental model
+2. **Behavioral** — How interface responds, flows, communicates
+3. **Visual** — Color, type, spacing, shadows
 
-### Craft Red Flags (🟡)
-- Default/system fonts
-- Arbitrary spacing values
-- Generic token names
-- Missing hover/focus/transitions
+Structural > Behavioral > Visual.
 
 ---
 
-## Quality Tests to Run
+## Examples
 
-### Swap Test
-> Replace typeface and colors with generic alternatives. Feels different?
-> If no → defaulted.
+**Visual:**
+> **Competing backgrounds** — Four distinct background colors on one screen. Cards are white, sidebar is gray, header is blue-tinted, content area is off-white. They don't establish hierarchy — they fragment the layout. Pick a surface strategy and commit.
 
-### Squint Test
-> Blur vision. Is hierarchy still perceivable?
-> If no → relies on color alone.
+**Layout:**
+> **Mobile doesn't adapt** — At 480px, the data table just shrinks. All 8 columns compress into illegibility. This is "works at mobile," not "good at mobile." Reorder to show the 2-3 most important columns, let users expand for detail.
 
-### Signature Test
-> Can you identify 5 elements unique to this product?
-> If no → generic.
+**Interaction:**
+> **Silent submit** — Button says "Save" but gives no feedback on click. User doesn't know if it worked. Add loading state during async, success confirmation after.
 
----
+**Flow:**
+> **Lost context on back** — User fills shipping address (step 2), clicks back to cart (step 1), returns — address fields empty. State not persisted across navigation.
 
-## Example Critique
-
-```markdown
-## Visual Critique: Settings Dashboard
-
-### First Impression
-Clean structure with clear sections. The sidebar feels heavy compared to
-the content area. Toggle states are ambiguous — hard to tell what's on vs off.
-
-### What's Working
-- Consistent spacing in form groups
-- Clear section headings with appropriate weight
-- Logical information architecture
-
-### Opportunities
-
-**🔴 Critical:**
-- Toggle states indistinguishable — Add clear on/off colors and labels.
-  Users shouldn't guess at state.
-- No loading indicator on save — Add "Saving..." state to prevent
-  double-submit anxiety.
-
-**🟡 Important:**
-- Sidebar darker than content creates visual weight imbalance — Use same
-  background with subtle border separator.
-- Form labels are same weight as values — Make labels secondary color
-  to establish hierarchy.
-
-**🟢 Polish:**
-- Section headers could use tighter tracking (-0.02em) for more presence.
-- Consider adding subtle hover states to form rows.
-
-### Top 3 Actions
-1. Fix toggle states — accessibility and usability blocker
-2. Add save feedback — prevents anxiety and double-submit
-3. Balance sidebar weight — improves overall visual harmony
-```
-
----
-
-## When Screenshot is Unclear
-
-If the image is:
-- **Too small:** Ask for higher resolution
-- **Partial:** Ask what's cropped out
-- **Ambiguous context:** Ask about user flow, purpose, platform
-
-Don't guess at what you can't see.
+**Paper cut:**
+> **Hover inconsistency** — Primary buttons have hover states. Secondary buttons don't. Table rows are hoverable but don't show it until clicked. Small, but these add up to "unfinished."
