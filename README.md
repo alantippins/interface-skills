@@ -1,6 +1,6 @@
 # Interface Skills
 
-This skill helps you see interface problems before users find them.
+This skill helps you see and improve interface problems, and suggests what would take your interface to the next level.
 
 ```bash
 npx skills add alantippins/interface-skills
@@ -10,9 +10,7 @@ npx skills add alantippins/interface-skills
 
 ## The Problem
 
-Interfaces ship with problems that feel obvious in retrospect. The user deleted something and couldn't get it back. They filled out a form, navigated away, came back — fields empty. They clicked a button and nothing happened. No feedback, no confirmation.
-
-These aren't edge cases. They're the places where the interface forgot it was talking to a human.
+Interfaces ship with problems that feel obvious in retrospect. The user deleted something and couldn't get it back. They filled out a form, navigated away, came back. Form fields are empty. They clicked a button and nothing happened. No feedback, no confirmation.
 
 ---
 
@@ -37,7 +35,7 @@ No modes to remember. Just run it against whatever you're working on.
 
 ## The Principles
 
-Eight principles to hold while looking at an interface. Not rules to check off — ways of seeing.
+Principles to reference while looking at an interface.
 
 **Reversibility.** Can users undo what they just did? Confident users are users who can recover from mistakes. When delete is permanent, users hesitate. When undo exists, they explore.
 
@@ -59,7 +57,7 @@ Eight principles to hold while looking at an interface. Not rules to check off �
 
 ## The Lenses
 
-Different ways of seeing the same interface. Not every lens applies to every screen — use judgment.
+Different ways of seeing the same interface. Not every lens applies to every screen. The skill uses judgement.
 
 **Visual Composition.** Look at color, typography, depth, and weight as a composition, not a collection of items. Count the distinct colors. List the type sizes. Ask: is there one depth strategy or several competing? The squint test — does importance survive the blur?
 
