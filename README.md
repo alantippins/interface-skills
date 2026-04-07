@@ -1,8 +1,6 @@
 # Interface Skills
 
-Design critiques for the thing you're building. Code, screenshot, plan — whatever you've got.
-
-For designers, engineers, PMs, anyone shipping software.
+This skill helps you see and improve interface problems, and suggests what would take your interface to the next level.
 
 ```bash
 npx skills add alantippins/interface-skills
@@ -12,9 +10,7 @@ npx skills add alantippins/interface-skills
 
 ## The Problem
 
-Interfaces ship with problems that feel obvious in retrospect. The user deleted something and couldn't get it back. They filled out a form, navigated away, came back. Form fields are empty. They clicked a button and couldn't tell if it worked.
-
-These aren't edge cases. They're the places where the interface forgot it was talking to a human.
+Interfaces ship with problems that feel obvious in retrospect. The user deleted something and couldn't get it back. They filled out a form, navigated away, came back. Form fields are empty. They clicked a button and nothing happened. No feedback, no confirmation.
 
 ---
 
@@ -33,25 +29,25 @@ Give it anything. It adapts.
 /interface-skills
 ```
 
-No modes to remember. Run it against whatever you're working on.
-
-If you give it a screenshot with no other context, it'll ask one question first — *what is this and what does it do?* — before critiquing. Skip the question by giving context up front.
+No modes to remember. Just run it against whatever you're working on.
 
 ---
 
 ## The Principles
 
-**Reversibility.** Can users undo what they just did? Confident users can recover from mistakes. When delete is permanent, users hesitate. When undo exists, they explore.
+Principles to reference while looking at an interface.
 
-**Forgiveness.** Does the interface prevent errors before they happen? A disabled button during submission stops the double-click. A confirmation before delete catches the misclick. Forgiveness assumes mistakes and catches them.
+**Reversibility.** Can users undo what they just did? Confident users are users who can recover from mistakes. When delete is permanent, users hesitate. When undo exists, they explore.
 
-**Persistence.** Does work survive refresh, navigation, network failure, closing the tab? Lose someone's work once and they remember it forever.
+**Forgiveness.** Does the interface prevent errors before they happen? A disabled button during submission stops the double-click. A confirmation before delete catches the misclick. Forgiveness assumes humans make mistakes and designs around that fact.
 
-**Transparency.** Do users know what's happening? Loading states, success confirmations, error explanations. Silent interfaces feel broken. I click, nothing changes — did it work? Is it broken? Am I supposed to wait?
+**Persistence.** Does work survive? Refresh, navigation, network failure, closing the tab. Lost work is the deepest betrayal an interface can commit. Users remember the time they lost twenty minutes of writing forever.
 
-**Escape.** Can users get out? Close the modal, cancel the flow, go back. Every state needs an exit.
+**Transparency.** Do users know what's happening? Loading states, success confirmations, error explanations. Silent interfaces breed anxiety. When I click and nothing changes, did it work? Is it broken? Am I supposed to wait?
 
-**Consistency.** Does the same action work the same way everywhere? When patterns shift without reason, users stop predicting what's next.
+**Escape.** Can users get out? Close the modal, cancel the flow, go back. Trapped users become frustrated users. Every state should have an exit.
+
+**Consistency.** Does the same action work the same way everywhere? When patterns shift without reason, users lose trust. They stop predicting what will happen next.
 
 **Craft.** Are these intentional choices or unexamined defaults? The difference shows. Craft is visible in the details — the hover state that exists, the spacing that breathes, the animation that clarifies rather than decorates.
 
@@ -63,7 +59,7 @@ If you give it a screenshot with no other context, it'll ask one question first 
 
 Different ways of seeing the same interface. Not every lens applies to every screen. The skill uses judgement.
 
-**Visual Composition.** Look at color, typography, depth, and weight as a composition, not a collection of items. Count the distinct colors. List the type sizes. Is there one depth strategy, or several competing? The squint test — does importance survive the blur?
+**Visual Composition.** Look at color, typography, depth, and weight as a composition, not a collection of items. Count the distinct colors. List the type sizes. Ask: is there one depth strategy or several competing? The squint test — does importance survive the blur?
 
 **Interface Composition.** Where does the eye land first? Is there one clear entry point, or does everything compete for attention? Is the density appropriate for who's using this and how often? Are there dead ends — elements that exist but lead nowhere?
 
@@ -83,52 +79,30 @@ Different ways of seeing the same interface. Not every lens applies to every scr
 > /interface-skills src/components/Settings.tsx
 
 ## Context
-Settings page for a B2B SaaS product. Monthly visitors, not daily.
+Settings page for a B2B SaaS product. Users visit monthly, not daily.
 
-## What I'm seeing
-Dense. Forty-plus controls visible at once, and the monthly-visitor pattern
-doesn't justify that density. The interface is laid out like a trading
-terminal for someone who's actually a casual dropper-in. That mismatch is
-the loudest thing on the screen, and it's paying interest on every other
-finding below.
-
-Zoom past the density and the smaller stuff starts showing up. Seven
-distinct grays across cards, borders, dividers. A save button that clicks
-into silence. Form state that doesn't survive a sidebar tap. Stacked,
-they're the "assembled rather than designed" feeling you can feel before
-you can name. The shape is right — this isn't a rethink, it's a polish
-pass with one scope cut.
+## First Impressions
+Dense. 40+ controls visible at once, but users only touch 2-3 per visit.
+The density says "power tool" but the audience is casual visitors.
 
 ## Findings
 
+### Visual Composition
+**Color fragmentation** — Seven distinct grays across the page: card backgrounds,
+borders, text, dividers. They're close enough to feel accidental rather than
+systematic. Three grays would do the job.
+
 ### Interaction
-**Transparency** — Save button gives no feedback. User clicks, nothing
-visible happens. Did it work? Add loading state during async, success
-confirmation after.
+**Transparency** — Save button gives no feedback. User clicks, nothing visible
+happens. Did it work? Add loading state during async, success confirmation after.
 
 **Persistence** — Form state doesn't survive navigation. User fills fields,
 clicks a link in the sidebar to check something, comes back — fields empty.
 
-### Visual Composition
-**Color fragmentation** — Seven distinct grays across the page: card
-backgrounds, borders, text, dividers. Close enough to feel accidental
-rather than systematic. Three grays would do the job.
-
 ## Top Opportunities
-1. Progressive disclosure — show common settings, hide advanced
-2. Add save feedback (loading → success)
-3. Persist form state across navigation
-
-## High Craft
-A settings page that remembers you. When monthly visitors come back, the
-section they touched last time is quietly expanded — "you were here last" —
-so they rebuild context in two seconds instead of scanning from scratch.
-Pair that with save feedback that summarizes what actually changed
-("billing contact changed to Jenna Cho") and the page picks up a
-personality.
-
-## Closing question
-What did I miss or get wrong?
+1. Add save feedback (loading → success)
+2. Persist form state across navigation
+3. Progressive disclosure — show common settings, hide advanced
 ```
 
 ### On a Plan
