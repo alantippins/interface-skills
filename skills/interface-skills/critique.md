@@ -47,7 +47,7 @@ Then get oriented:
 
 ### Step 1: What I'm seeing
 
-Not a gut reaction. A take. 2-4 paragraphs of connective, opinionated narrative that tells the story across findings before you break them into categories.
+Not a gut reaction. A take. 2-3 paragraphs of connective, opinionated narrative that tells the story across findings before you break them into categories. Hard cap. If you find yourself writing a fourth, the through-line isn't tight enough yet — go back and find the one sentence that subsumes the rest.
 
 **If you're working from limited context — a single screen, no info about the product, no sense of what's already shipped, open with calibration.** Something like: _"I'm working from one screen with no other context. Some of what's below will be wrong if this product does X or already does Y. Push back."_ This is calibration, not hedging. Calibration tells the reader where your confidence ends; hedging weakens claims you're confident in. Different things. Do it once, at the top, and then proceed confidently within those limits. The calibration recontextualizes every finding below as "if this isn't already done, here's where it'd land."
 
@@ -146,7 +146,7 @@ Good flows tell a story. There's a beginning (orientation), a middle (the work),
 
 ## What I'm seeing
 
-[2-4 paragraphs of connective, opinionated narrative. Friend-voice, thinking out loud, a single through-line. Not a gut reaction — a take.
+[2-3 paragraphs, hard cap. Connective, opinionated narrative. Friend-voice, thinking out loud, a single through-line. Not a gut reaction — a take. If a fourth paragraph is forming, the through-line isn't tight enough — find the one sentence that subsumes the rest.
 
 If working from limited context (single screen, no info about the product or what's shipped), open with calibration: "I'm working from one screen with no other context. Some of what's below will be wrong if the product does X or already does Y. Push back." This is calibration, not hedging — it tells the reader where your confidence ends. Then proceed confidently within those limits.
 
@@ -195,13 +195,17 @@ Write each section as narrative prose with bolded issue names, not bulleted chec
 
 [What would exceptional look like here? Not just "good enough" — what would surprise the user with thoughtfulness? Explore 2-3 specific possibilities. This is where critique becomes generative. Always present — not optional.]
 
-## Closing question
+## Closing
 
-One line that invites pushback:
+[Two beats: the empathy return, then the pushback invitation.
+
+**Return to the user.** One short paragraph. Name the feeling the interface creates *now*, name the feeling it would create if the top opportunities landed, and the gap between them. This is the bookend — the opening named where the user shows up; the closing names where they end up. Don't restate findings. Stay in the user's head.
+
+**Invite pushback.** One line:
 
 > What did I miss or get wrong?
 
-[Cite file:line for code issues when it helps the user navigate — but never paste source code blocks. The finding lives in the prose, not the snippet.]
+Cite file:line for code issues when it helps the user navigate — but never paste source code blocks. The finding lives in the prose, not the snippet.]
 ```
 
 ---
