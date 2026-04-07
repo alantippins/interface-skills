@@ -14,6 +14,8 @@ npx skills add alantippins/interface-skills
 
 Interfaces ship with problems that feel obvious in retrospect. The user deleted something and couldn't get it back. They filled out a form, navigated away, came back. Form fields are empty. They clicked a button and couldn't tell if it worked.
 
+These aren't edge cases. They're the places where the interface forgot it was talking to a human.
+
 ---
 
 ## How It Works

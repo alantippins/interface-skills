@@ -42,6 +42,7 @@ Then get oriented:
 - **The screen** — what does it do, who's it for, where does it sit in the product?
 - **The job** — what did the user come here to get done? (The outcome, not the feature.)
 - **The headspace** — what state are they in when they show up? Anxious, focused, browsing, deciding, distracted, under pressure. Pick the specific word.
+- **The category** — what kind of thing is this (procurement dashboard, reading app, settings page, social feed, checkout)? What do users expect to find here without thinking, based on every other thing in the category they've used? Name that bar up front. Every finding can ask whether the screen clears it.
 
 **Carry this through.** Every finding should ask whether the interface respects or ignores that state.
 
@@ -69,7 +70,7 @@ Look at the interface as a composition, not a collection of items.
 
 **Color.** Count the distinct colors. Not "there's blue" but how many blues, how many grays, how many accents. The number tells you something. Four colors working together is intention; twelve scattered around is fragmentation. What's each color's job? Accent should mean action or emphasis. When it also means decoration, it stops meaning anything. Look for the relationships. Are colors working as a family (analogous, complementary, monochromatic) or just coexisting?
 
-**Type.** List the sizes and weights you see. A clear scale has distinct levels and hierarchy. You can point to the headline, the body, the metadata, the labels. A muddy scale has sizes so close they compete rather than complement. Look for one hero size that establishes importance. If everything's shouting, nothing is. Type is the skeleton of hierarchy. If it's not working, nothing else will save it.
+**Type.** List the sizes and weights you see. A clear scale has distinct levels and hierarchy. You can point to the headline, the body, the metadata, the labels. A muddy scale has sizes so close they compete rather than complement. Look for one hero size that establishes importance. If everything's shouting, nothing is. Type is the skeleton of hierarchy. If it's not working, nothing else will save it. Then look inside a single row or card. Is there hierarchy within the unit, or is the type flat? Name louder than role, value louder than label. Cards with flat internal type read as data dumps even when the page-level scale is clean.
 
 **Depth.** What's the strategy here. Borders, shadows, surface tints, or flat? The question isn't which one, it's whether there's ONE approach applied consistently. Mixed strategies (shadows here, borders there, tints elsewhere) signal "assembled from different sources." When depth is intentional, elevation communicates hierarchy: modals float above cards, cards float above the base surface. When it's not, things just... sit there.
 
@@ -86,6 +87,20 @@ Look at the interface as a system of attention and flow.
 **Sequence.** If this takes more than one glance, what order do elements reveal themselves? A clear visual path guides the eye: headline → supporting text → action. A muddy path leaves the user to figure out the reading order on their own. Look at how groupings work — do they guide the sequence or interrupt it? Proximity and whitespace are doing choreography whether you intended it or not.
 
 **Dead ends.** Are there elements that don't lead anywhere? Cards with no action, sections that exist but serve no purpose, information displayed with no next step. These are visual cul-de-sacs. Good interfaces offer progressive disclosure — there's always somewhere to go next. If a user's attention lands on something, it should reward that attention.
+
+### Copy
+
+Read the words on the screen. Are they in the user's language or system language? "Validation failed" or "Looks like your card number is missing one digit"? Is the empty state apologetic ("No items") or generative ("Add your first project — here's how")? Are CTAs verbs ("Send invoice") or nouns ("Action")? Are error messages explanatory, or just "Something went wrong"?
+
+Microcopy is the cheapest upgrade. A product with sharp visuals and generic copy still feels generic. The words do half the work.
+
+Pay attention to:
+
+- **Empty states.** Apologetic or generative?
+- **Errors.** Do they explain what happened and how to fix it, or just signal failure?
+- **CTAs.** Verbs over nouns. Specific over generic. "Save changes" beats "Submit."
+- **Labels.** Do they match what the user calls the thing, or use the engineering term?
+- **Helper text.** Real work, or filler?
 
 ### Interaction
 
@@ -154,7 +169,7 @@ Name the thing that makes every other finding smaller if you fix it, or worse if
 
 ## Findings
 
-Write each section as narrative prose with bolded issue names, not bulleted checklists. Lead with observation, then impact, then opportunity. Only the lenses that matter for this interface — skip what doesn't apply.
+Write each section as narrative prose with bolded issue names, not bulleted checklists. Lead with observation, then impact, then opportunity. Only the lenses that matter for this interface — skip what doesn't apply. **Watch for clustering.** When a finding wants to show up in two sections, it's one finding with two surfaces. Put it in the section that owns the root cause and reference the other surface inside the same paragraph.
 
 ### General
 
@@ -178,6 +193,10 @@ Write each section as narrative prose with bolded issue names, not bulleted chec
 ### Interface Composition
 
 [Entry point, density, sequence, dead ends. Where does the eye land? Is complexity revealed gradually? Are there visual cul-de-sacs?]
+
+### Copy
+
+[The words on the screen — labels, errors, empty states, CTAs, helper text. Are they in user language or system language? Doing real work or filling space?]
 
 ### Craft
 
@@ -217,6 +236,8 @@ Findings are paragraphs, not sentence-clusters. Each one opens with a bolded tak
 Not this: **Color** — too many uses of purple. Distracts from hierarchy. Reduce.
 
 This: **Purple stopped meaning anything.** It's on the nav, the badges, the headline highlights, two gradients. By the time the eye reaches the CTA, purple is wallpaper. Pick the two or three places where it actually points at something and let everything else go quiet.
+
+**Consolidate related findings.** Two paragraphs about the same root cause are one paragraph with two examples. Don't make the reader rediscover the same insight in a different section. Say it once, name the surfaces it shows up on, move on. If you catch yourself writing the second paragraph, look up: is this a new finding, or the same one in a new section?
 
 For interface issues, frame as missed opportunities rather than mistakes. "We're missing a chance to..." moves the reader forward. "You got this wrong" makes them defensive. Same finding, different center of gravity.
 
@@ -307,11 +328,11 @@ Work through each principle. Surface what's unaddressed:
 
 Order findings by impact:
 
-1. **UX** — Information architecture, missing functionality, wrong mental model
-2. **Interaction** — How interface responds, flows, communicates
+1. **Structural** — Information architecture, missing functionality, wrong mental model
+2. **Behavioral** — How interface responds, flows, communicates
 3. **Visual** — Color, type, spacing, shadows
 
-UX > Interaction > Visual.
+Structural > Behavioral > Visual.
 
 ---
 
@@ -365,6 +386,34 @@ UX > Interaction > Visual.
 > - Smart defaults that pre-fill based on previous entries or context
 >
 > The current form works. These details would make it _feel_ like someone cared.
+
+**Calibration:**
+
+> I'm working from one screen with no info about the rest of the product. Some of what's below will be wrong if you've already shipped X or there's another view doing Y. Push back where I'm off.
+>
+> [Then proceed confidently within those limits — no further hedging in individual findings.]
+
+**Consolidation — wrong vs right:**
+
+> Wrong — same root cause split across two sections:
+>
+> *Visual Composition:* **Purple overused** — 14 distinct uses of purple across the page. Becomes noise instead of signal.
+>
+> *Coherence:* **Brand drift** — purple appears on so many surfaces that the brand color stops meaning anything specific.
+>
+> Right — one paragraph in the section that owns the root cause:
+>
+> *Visual Composition:* **Purple stopped meaning anything** — 14 distinct uses across nav icons, card borders, badges, headline highlights, two gradients. By the time the eye reaches the CTA, purple is wallpaper. Pick the two or three places where it actually points at something and let the rest go quiet. (Same finding shows up downstream as a brand-coherence symptom — same fix.)
+
+**Copy:**
+
+> **'Action' is not a verb** — The bulk-action menu trigger reads "Action ▾" and reveals "Delete", "Archive", "Move". The trigger is a noun, the items are verbs — the user has to scan twice to know what they're choosing between. Rename to "More actions" or "Choose an action," or skip the trigger label entirely and surface the verbs as a row.
+
+**Closing — empathy return + pushback:**
+
+> The user came in vigilant. Looking for problems first, details second. Right now they leave still vigilant, because the page made them do the triage work themselves. Land the top opportunities and they leave with the answer in the headline, the troubled order visibly heavy, a clear path to fix it. They can act, not just read.
+>
+> What did I miss or get wrong?
 
 ---
 
