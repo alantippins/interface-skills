@@ -79,7 +79,7 @@ Look at the interface as a composition, not a collection of items.
 
 Look at the interface as a system of attention and flow.
 
-**Entry point.** Where does your eye land first? Where should the user focus? There should be ONE clear answer. If you're bouncing between the hero, the sidebar, the nav badges, and an inline CTA, nothing has claimed priority. The best interfaces are ruthless about this. Linear, Stripe, Apple all establish a clear focal point in their designs. What would they do here?
+**Entry point.** Where does your eye land first? Where should the user focus? There should be ONE clear answer. If you're bouncing between the hero, the sidebar, the nav badges, and an inline CTA, nothing has claimed priority. The best interfaces are ruthless about this. Linear, Raycast, Notion all pick one place for your eye to land. What would they do here?
 
 **Density.** Is the amount of information appropriate for the context? A dashboard used daily can be dense — the user builds fluency. An onboarding screen should breathe — the user is orienting. Settings visited monthly should show the common case and hide the advanced. Density isn't good or bad; it's appropriate or not. Match it to expertise level and task frequency.
 
@@ -206,14 +206,15 @@ One line that invites pushback:
 
 ---
 
-## Finding Format
+## Finding format
 
-Frame findings either as:
+Findings are paragraphs, not sentence-clusters. Each one opens with a bolded take that names the thing, then unfolds. What's there, what it's doing to the reader, what would change it. The opening should be something you'd say out loud, not a category label.
 
-- **[Issue]** — [Observation]. [Impact]. [Opportunity].
-- **Missing opportunity:** [What could be better]. [What's there now]. [The gap].
+Not this: **Color** — too many uses of purple. Distracts from hierarchy. Reduce.
 
-For interface design issues, prefer opportunity framing. "We're missing an opportunity to..." feels more actionable than a direct statement of what's wrong.
+This: **Purple stopped meaning anything.** It's on the nav, the badges, the headline highlights, two gradients. By the time the eye reaches the CTA, purple is wallpaper. Pick the two or three places where it actually points at something and let everything else go quiet.
+
+For interface issues, frame as missed opportunities rather than mistakes. "We're missing a chance to..." moves the reader forward. "You got this wrong" makes them defensive. Same finding, different center of gravity.
 
 ---
 
@@ -302,11 +303,11 @@ Work through each principle. Surface what's unaddressed:
 
 Order findings by impact:
 
-1. **Structural** — Information architecture, missing functionality, wrong mental model
-2. **Behavioral** — How interface responds, flows, communicates
+1. **UX** — Information architecture, missing functionality, wrong mental model
+2. **Interaction** — How interface responds, flows, communicates
 3. **Visual** — Color, type, spacing, shadows
 
-Structural > Behavioral > Visual.
+UX > Interaction > Visual.
 
 ---
 
@@ -360,3 +361,9 @@ Structural > Behavioral > Visual.
 > - Smart defaults that pre-fill based on previous entries or context
 >
 > The current form works. These details would make it _feel_ like someone cared.
+
+---
+
+## Influences
+
+The interaction principles trace back to [Nielsen's 10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) (1994). Reversibility and Escape from "User control and freedom." Transparency from "Visibility of system status." Forgiveness from "Error prevention." Consistency from "Consistency and standards." Recognition from "Recognition rather than recall." [Laws of UX](https://lawsofux.com/) is the other one worth knowing.
