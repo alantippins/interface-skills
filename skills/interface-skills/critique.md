@@ -17,6 +17,8 @@ Surface interface quality concerns. Works on anything: code, screenshots, specs,
 
 The principles and lenses apply to both. The output format adapts.
 
+Calibrate length to input. The full format applies to full artifacts. A screen, a flow, a page. For a single component or a narrow question ("thoughts on this button?"), collapse to what's useful: First Impressions + relevant lens + Top Opportunity. The structure scales down. A 1500-word critique on a 200-pixel button is its own kind of bad design.
+
 ---
 
 ## Input Modes
@@ -37,6 +39,7 @@ The principles and lenses apply to both. The output format adapts.
 
 Before critiquing:
 
+- **What stage is this?** Rough exploration, working mockup, or production-close? Calibrate depth — type scale on a wireframe is wasted breath.
 - **What is this?** — App type, screen purpose, target user
 - **What job is this interface hired to do?** — What outcome is the user seeking? What progress are they trying to make? (Not feature, but outcome.)
 - **What emotional context?** — Stressful? Casual? High-stakes? Routine?
@@ -256,22 +259,27 @@ Work through each principle. Surface what's unaddressed:
 ### Questions
 
 **Intent:**
+
 - [Questions about who/what/feel if unclear]
 
 **Craft:**
+
 - [Decisions that need to be made early]
 
 **Interaction:**
 
 **Reversibility:**
+
 - [Questions about recovery]
 
 **Persistence:**
+
 - [Questions about state survival]
 
 [...etc, only principles that apply]
 
 ### Suggestions
+
 [If you have enough context to suggest answers, offer them as defaults to accept or override]
 ```
 
