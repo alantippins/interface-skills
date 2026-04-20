@@ -31,11 +31,15 @@ Give it anything. It adapts.
 
 No modes to remember. Just run it against whatever you're working on.
 
+Output opens with a **Design Score**. 8 principles graded 0 to 4, with a total and a band: Ship, Polish, Problems, or Blocked. Scan the score to track across iterations. Read the narrative to understand why.
+
 ---
 
 ## The Principles
 
 Principles to reference while looking at an interface.
+
+Based on Nielsen's usability heuristics and Laws of UX. These eight are the ones that fire when someone actually touches the interface. Craft is the intentionality lens.
 
 **Reversibility.** Can users undo what they just did? Confident users are users who can recover from mistakes. When delete is permanent, users hesitate. When undo exists, they explore.
 
@@ -65,7 +69,7 @@ Different ways of seeing the same interface. Not every lens applies to every scr
 
 **Interaction.** This is where the principles live. Does the interface help the user do their job, or make them work around it? Can they tell what's clickable? Do they know what state they're in?
 
-**Craft.** The technical quality users feel even when they can't name it. Interaction states (default, hover, active, focus, disabled). Data states (loading, empty, error). Accessibility. The polish that separates "it works" from "someone cared."
+**Craft.** The layer beneath the design. Interaction states (default, hover, active, focus, disabled). Data states (loading, empty, error). Accessibility. The polish that separates "it works" from "someone cared."
 
 **Consistency.** Does the interface feel like one designer made it, or like it was assembled from different kits? Are similar actions handled the same way throughout? Do patterns shift without reason?
 
@@ -131,6 +135,24 @@ dialog for single items, undo toast for bulk operations.
 ```
 
 Add `--teach` to include principle explanations with each finding.
+
+---
+
+## How to use it
+
+Run it. Fix what's worth fixing. Run it again.
+
+The skill will always find something. Design critique is continuous. It won't go quiet on its own and tell you you're done.
+
+Three signals to watch for:
+
+**The Design Score stops moving.** Two or three runs land at the same band, numbers barely shift. That's the plateau. Progress has stopped — you're polishing inside a local maximum.
+
+**Findings shift from diagnostic to generative.** Early runs surface what's broken — silent submits, lost state, bad hierarchy. Later runs shift to what this could become — reimagined flows, product-level proposals. When the diagnostic findings go quiet and "Where this could go next" is the only section producing new material, you've hit the floor. The next move is a redesign, not another polish pass.
+
+**Top Opportunities become taste, not fixes.** "Tighten the type scale" is taste. "Users can't recover from mistakes" is a fix. When you're only getting the former, ship.
+
+This skill is another pair of eyes for your designs. It'll always find something worth naming. Go with your gut when you feel you're ready.
 
 ---
 

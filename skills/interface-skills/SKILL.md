@@ -21,6 +21,8 @@ Load [critique.md](critique.md) for the full methodology.
 | Spec / Plan      | Surface unaddressed questions |
 | Multiple screens | Add flow coherence lens       |
 
+Every output opens with a **Design Score** — 8 principles scored 0-4 against the rubric in [references/interaction.md](references/interaction.md#scoring) — followed by the writerly critique. Read the narrative to understand. Scan the score to track across iterations.
+
 ## Modifiers
 
 `--teach` — Add principle explanations to findings

@@ -40,12 +40,23 @@ Calibrate length to input. The full format applies to full artifacts. A screen, 
 Before critiquing:
 
 - **What stage is this?** Rough exploration, working mockup, or production-close? Calibrate depth — type scale on a wireframe is wasted breath.
-- **What is this?** — App type, screen purpose, target user
+- **What is this?** — App type, screen purpose, target user.
 - **What job is this interface hired to do?** — What outcome is the user seeking? What progress are they trying to make? (Not feature, but outcome.)
-- **What emotional context?** — Stressful? Casual? High-stakes? Routine?
-- **What state is the user likely in?** — Anxious, focused, browsing, deciding?
+- **What state is the user likely in?** — Describe the user's posture in one sentence. Rushed, bored, anxious, skimming, committing — say it like a person would.
+- **What does getting this wrong cost?** — Dollars, time, trust, safety, reputation. Name the cost explicitly; every finding below should respect it.
 
-**Carry this through:** Every finding should consider whether the interface respects or ignores the user's likely emotional state and whether it enables the job they came to do.
+**Carry this through:** Every finding considers whether the interface respects or ignores the user's likely state, whether it enables the job they came to do, and whether the cost of getting it wrong is legible in the interface.
+
+**Confirm what the screen can't show you:**
+
+Static screens lie by omission. Before making factual claims about behavior, confirm these with the caller — or default to conditional framing if you can't:
+
+- Is there a defined brand color or design token system? (Prevents false "color fragmentation" findings.)
+- Does this autosave or preserve state across navigation? (Prevents false "no save" findings.)
+- Are there keyboard shortcuts, gestures, or interactions not visible here? (Prevents false "no escape" findings.)
+- What's not on this screen that's part of the flow? (Prevents false "dead end" findings.)
+
+If answers unknown: hedge. *"If this doesn't autosave, that's a Persistence gap"* lands; *"This doesn't autosave"* overclaims.
 
 ### Step 1: First Impressions
 
@@ -77,7 +88,7 @@ Look at the interface as a composition, not a collection of items.
 
 Now look at the interface as a system of attention and flow.
 
-**Entry point.** Where does your eye land first? There should be ONE clear answer. If you're bouncing between the hero, the sidebar, the nav badges, and an inline CTA, nothing has claimed priority. The best interfaces are ruthless about this — Linear, Stripe, Apple all establish a single focal point and subordinate everything else. What would they do here?
+**Entry point.** Where does your eye land first? There should be ONE clear answer. If attention bounces between the hero, the sidebar, the nav badges, and an inline CTA, nothing has claimed priority. The best interfaces are ruthless about this. Pick one reference this interface should sit next to — then describe what that reference does that this one doesn't.
 
 **Density.** Is the amount of information appropriate for the context? A dashboard used daily can be dense — the user builds fluency. An onboarding screen should breathe — the user is orienting. Settings visited monthly should show the common case and hide the advanced. Density isn't good or bad; it's appropriate or not. Match it to expertise level and task frequency.
 
@@ -102,11 +113,13 @@ This is where the interface becomes a conversation. Does it help the user do the
 
 Not every principle applies to every interface. A static marketing page doesn't need Persistence. A checkout flow needs all of them. Use judgment.
 
+**Scoring.** For each principle that applies, score 0-4 using the rubric in [interaction.md](references/interaction.md#scoring). The scores populate the Design Score table at the top of the output. Mark N/A for principles that don't apply (a static marketing page doesn't need Persistence) and adjust the total's denominator accordingly. The narrative finding per principle stays in this section — the score is the handle, the finding is the substance.
+
 **Motion.** If there's animation, is it earning its place? Motion should clarify, not decorate. And users should never wait for an animation to finish before they can act.
 
 ### Craft & Technical
 
-Technical quality that users feel even when they can't name it. This is where you look at states, accessibility, and polish — the craft layer beneath the design.
+The details that separate "it works" from "someone cared." States, accessibility, polish — the craft layer beneath the design, plus the paper cuts that add up to an unfinished feel.
 
 For detailed technical checks, reference [checklists.md](references/checklists.md). The checklist covers interaction states (all five: default, hover, active, focus, disabled), data states (loading, empty, error), accessibility (keyboard navigation, focus visibility, semantics, contrast), motion constraints, and mobile considerations.
 
@@ -141,12 +154,30 @@ Good flows tell a story. There's a beginning (orientation), a middle (the work),
 ```markdown
 ## Context
 
-[1-2 sentences on what this is and who it's for]
-[Name the emotional context: anxious checkout, routine dashboard, exploratory browse, etc.]
+[1-2 sentences on what this is and who it's for. Name the user's state in one human sentence (rushed, anxious, skimming, committing). Name what getting this wrong costs — dollars, time, trust, safety, reputation. The cost line grounds every finding below.]
+
+## Design Score
+
+| # | Principle | Score | Note |
+|---|---|---|---|
+| 1 | Reversibility | ? | [short handle — one line] |
+| 2 | Forgiveness | ? | [short handle] |
+| 3 | Persistence | ? | [short handle] |
+| 4 | Transparency | ? | [short handle] |
+| 5 | Escape | ? | [short handle] |
+| 6 | Consistency | ? | [short handle] |
+| 7 | Craft | ? | [short handle] |
+| 8 | Recognition | ? | [short handle] |
+
+**Total: X / Y — [Band]** (mark N/A where a principle doesn't apply; Y = applicable principles × 4)
+
+Bands: ≥87% **Ship** · 68-86% **Polish** · 44-67% **Problems** · <44% **Blocked**
+
+Scores are interpretive, not measured. Use them for trend-across-iterations, not absolute benchmarks. See [interaction.md](references/interaction.md#scoring) for the rubric.
 
 ## First Impressions
 
-[1 paragraph. Gut reaction. What's the overall impression? Name the emotion the interface creates — not just "good" or "confusing" but the specific feeling: "quiet confidence," "overwhelming density," "polished but cold." What stands out? What feels off? Be direct and honest, not tentative. This is the "noticing" step — seeing what's actually there, not what you expect to see.]
+[1 paragraph. Gut reaction. What's the overall impression? Name the emotion the interface creates — not just "good" or "confusing" but the specific feeling: "quiet confidence," "overwhelming density," "polished but cold." What stands out? What feels off? Be direct and honest, not tentative. Describe the screen to someone who can't see it. The description is the critique. Before judgment, inventory.]
 
 ## Findings
 
@@ -158,35 +189,36 @@ Write each section as narrative prose with bolded issue names, not bulleted chec
 
 ### Interface Composition
 
-[Entry point, density, sequence, dead ends. Where does the eye land? Is complexity revealed gradually? Are there visual cul-de-sacs?]
+[Entry point, density, sequence, dead ends. Where does the eye land? Is complexity revealed gradually? Are there visual cul-de-sacs? Do the same entities appear in multiple places with different mental models?]
 
 ### Interaction
 
-[The Principles — but only the ones that matter for this interface. Skip what doesn't apply. For each relevant principle, what's the finding?]
+[The principles — but only the ones that matter for this interface. For each relevant principle, give the score (0-4) and the finding underneath. Keep the narrative; the scores in the Design Score table above are the handles.]
 
 ### Craft
 
-[States, accessibility, polish. The technical quality that users feel even when they can't name it.]
+[States, accessibility, polish. The details that separate "it works" from "someone cared." Paper cuts — the small compounding issues (hover inconsistencies, redundant captions, UI debris) — live here.]
 
 ### Consistency & Conventions
 
-[Pattern consistency, platform conventions, component reuse, visual cohesion. Does it feel like one designer made this?]
+[Pattern consistency, platform conventions, component reuse, visual cohesion. Does it feel like one designer made this, or like it was assembled from different kits?]
 
-### User Context
+## User Context
 
 [Return to empathy. Answer these in prose, not bullets:]
 
 - How does this interface make the user feel? Name the emotion precisely.
 - What is the user's likely state of mind coming into this?
 - Does the interface respect or ignore that state?
+- Is the cost of getting this wrong visible enough to the user?
 
 ## Top Opportunities
 
-[3-5 highest-impact changes, framed as opportunities, each in one sentence]
+[3-5 highest-impact changes, framed as openings. Each in one sentence, tied to affected principles where relevant.]
 
-## High Craft
+## Where this could go next
 
-[What would exceptional look like here? Not just "good enough" — what would surprise the user with thoughtfulness? Explore 2-3 specific possibilities. This is where critique becomes generative.]
+[What this interface could become. Two or three product directions, first-person and specific. "If I had one more day here, I'd…" Not polish-level suggestions — product-level proposals. Imagine the fuller version: what would this be doing if it fully honored the job it's hired to do?]
 
 [Include file:line for code issues where relevant]
 ```
@@ -197,10 +229,26 @@ Write each section as narrative prose with bolded issue names, not bulleted chec
 
 Frame findings either as:
 
-- **[Issue]** — [Observation]. [Impact]. [Opportunity].
-- **Missing opportunity:** [What could be better]. [What's there now]. [The gap].
+- **[Issue name]** — What's there. What it costs. What's better.
+- **Opening:** [What could be better]. [What's there now]. [The gap].
 
-For interface design issues, prefer opportunity framing. "We're missing an opportunity to..." feels more actionable than a direct statement of what's wrong.
+Prefer door-opening framing. A finding framed as an opening invites action; a finding framed as a gap just documents one. "There's a reward moment waiting here" gets built; "progress feedback is missing" gets filed.
+
+---
+
+## On asserting absence
+
+The skill can only see what's in the pixels. When a claim requires knowing something offscreen — autosave, brand system, keyboard shortcuts, parts of the flow not rendered here — frame the finding conditionally, not as fact.
+
+✅ *"If this doesn't autosave, that's a Persistence gap."* — invites verification
+❌ *"This doesn't autosave."* — overclaims from a static image
+
+✅ *"If purple isn't a defined brand color, nine uses is fragmentation."* — respects possible intent
+❌ *"Purple is monoculture."* — ignores brand-system reality
+
+The first lands as a question worth answering. The second overclaims. When uncertain, hedge explicitly — Step 0 should have confirmed these where possible, but if it didn't, the finding itself names the conditional.
+
+This matters for scoring too. Don't drop a principle score based on assumed absence. If you can't verify a behavior, either mark N/A or score based on what's visibly honored. A 2 should require actual pain, not assumed pain.
 
 ---
 
@@ -305,7 +353,7 @@ Structural > Behavioral > Visual.
 
 **Interface Composition:**
 
-> **No entry point** — Hero, sidebar promo, navigation badges, and inline CTA all compete at roughly equal visual weight. User's eye bounces between them with no clear starting point. The hero is theoretically the entry, but the animated sidebar pulls just as hard. Pick one focal point and subordinate everything else.
+> **No entry point** — Hero, sidebar promo, navigation badges, and inline CTA all compete at roughly equal visual weight. Nothing has claimed priority — attention has to pick a target. The hero is theoretically the entry, but the animated sidebar pulls just as hard. Pick one focal point and subordinate everything else.
 
 **Density:**
 
@@ -339,11 +387,11 @@ Structural > Behavioral > Visual.
 >
 > **Does the interface respect that state?** It respects their time — scannable, fast, no friction. But it doesn't reward curiosity. For a portfolio where the goal is to make someone want to learn more, "calm competence" might not be enough. The user needs a reason to click.
 
-**High craft:**
+**Where this could go next:**
 
-> What would exceptional look like here? The form validation is technically correct, but where could we take it if we put in a little bit more?
+> The form validation works. If I had one more day on this, here's where I'd take it:
 >
-> - A subtle progress indicator that grows as the form fills out
-> - Smart defaults that pre-fill based on previous entries or context
+> - A subtle progress indicator that grows as the form fills — the form stops feeling like a blocker and starts feeling like momentum
+> - Smart defaults pre-filled from context or prior entries — the form does work *for* the user instead of asking them to do work
 >
-> The current form works. These details would make it _feel_ like someone cared.
+> Small moves. But they shift the form from "functional" to "someone thought about me" — which is also what separates a task from a product.
