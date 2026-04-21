@@ -34,7 +34,7 @@ Before assessing typography, establish the context. This sets the bar — a data
 
 **Primary reading task** — scan, read, fill in, decide. Determines where measure and hierarchy matter most.
 
-**Font fit** — Does the typeface match the product's personality? Evaluate on three axes:
+**Font fit** — Find the actual typeface first: check `tailwind.config`, `globals.css`, or the font import. Never guess or assume a framework default. Then evaluate on three axes:
 
 - **Neutral ↔ Expressive** — Neutral types (Inter, DM Sans, Geist) recede behind content. Expressive types (Fraunces, Editorial New, Canela) carry personality. A data tool usually wants neutral. A consumer product may want expressive.
 - **Geometric ↔ Humanist** — Geometric (Futura, Circular, DM Sans) feels precise and modern. Humanist (Inter, Gill Sans, Myriad) feels approachable and legible. Humanist generally reads better at small sizes.
@@ -61,13 +61,15 @@ State the counts. "6 sizes, 2 weights, 4 colors" gives you the raw material for 
 
 **Form the visual impression first.** Whether the input is a screenshot or code, establish what the screen looks like before reading implementation details. For code: mentally render it. What does the hierarchy look like? Does rhythm hold? Where does the eye go?
 
-Score from that impression. Then — and only then — read the code to understand how findings are implemented. Code reading does not introduce new score deductions. If you didn't see it in the visual impression, it doesn't move the score.
+Score from that impression. Then — and only then — read the code to understand how findings are implemented.
+
+**The score is locked after the visual pass.** Code reading surfaces implementation flags — it does not reopen the score. A raw `<p>` tag that renders identically to a `<Text>` component is a code flag, not a hierarchy failure. Token violations that produce no visible difference are code flags, not signal failures. If the user can't see it, it doesn't move the score.
 
 Run each of the four jobs. For each finding: what you see, why it matters, what it could be instead. Write findings as a designer, not a code reviewer.
 
 **Screenshot input** — visual hierarchy only. Does the squint test pass? (Blur your vision — can you still identify 4 levels?) Is the measure constrained? Does weight track importance?
 
-**Code input** — mentally render first, score from impression, then read code for implementation flags only.
+**Code input** — mentally render first, lock the score, then read code for implementation flags only. Keep flags in a separate section from findings.
 
 ---
 
@@ -93,5 +95,7 @@ Mark N/A where a job doesn't apply (e.g. Measure on a label component).
 - A 3 on Signal: weight and size track semantic importance. No obvious contradictions.
 
 A 4 requires intentional craft beyond just working — type that would make a typographer notice.
+
+**Code flags don't move the score.** Implementation issues (raw HTML, token mismatches, missing constraints) belong in a Code Flags section after the score. They're real and worth fixing — they're just not what the score measures. The score measures what the user experiences.
 
 **Bands:** ≥75% Solid · 50–74% Needs Work · <50% Broken
