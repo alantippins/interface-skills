@@ -65,43 +65,8 @@ State the counts. "6 sizes, 2 weights, 4 colors" gives you the raw material for 
 
 **Form the visual impression first.** Whether the input is a screenshot or code, establish what the screen looks like before reading implementation details. For code: mentally render it. What does the hierarchy look like? Does rhythm hold? Where does the eye go?
 
-Score from that impression. Then — and only then — read the code to understand how findings are implemented.
-
-**The score is locked after the visual pass.** Code reading surfaces implementation flags — it does not reopen the score. A raw `<p>` tag that renders identically to a `<Text>` component is a code flag, not a hierarchy failure. Token violations that produce no visible difference are code flags, not signal failures. If the user can't see it, it doesn't move the score.
-
 Run each of the four jobs. For each finding: what you see, why it matters, what it could be instead. Write findings as a designer, not a code reviewer.
 
 **Screenshot input** — visual hierarchy only. Does the squint test pass? (Blur your vision — can you still identify 4 levels?) Is the measure constrained? Does weight track importance?
 
-**Code input** — mentally render first, lock the score, then read code for implementation flags only. Keep flags in a separate section from findings.
-
----
-
-## Score
-
-Score each job 0–4:
-
-| Score | Meaning |
-| ----- | ------- |
-| 0 | Broken — job isn't being done |
-| 1 | At risk — partially addressed, breaks under real content |
-| 2 | Uneven — works in some places, not others |
-| 3 | Solid — job is done, minor gaps |
-| 4 | Elevated — intentional craft, nothing wasted |
-
-Mark N/A where a job doesn't apply (e.g. Measure on a label component).
-
-**Calibration:**
-
-- A 3 on Hierarchy: four distinct levels identifiable without color. You can name them.
-- A 3 on Rhythm: scale has internal logic, spacing feels consistent. No jarring jumps.
-- A 3 on Measure: body copy constrained appropriately for the context.
-- A 3 on Signal: weight and size track semantic importance. No obvious contradictions.
-
-A 4 requires intentional craft beyond just working — type that would make a typographer notice.
-
-**Match the number to the rubric, not to the length of your findings.** Before writing a score, read the rubric row for that number and check that your finding actually describes it. If your finding reads "works in most places, one or two real issues," that is *Solid — minor gaps* (3), not *Uneven — works in some places, not others* (2). Do not deduct a point just because you have something to say; a 3 is allowed to have findings attached to it. If your finding only praises the work ("exactly correct," "no runaway," "nothing wasted"), write 4, not 3.
-
-**Code flags don't move the score.** Implementation issues (raw HTML, token mismatches, missing constraints) belong in a Code Flags section after the score. They're real and worth fixing — they're just not what the score measures. The score measures what the user experiences.
-
-**Bands:** ≥75% Solid · 50–74% Needs Work · <50% Broken
+**Code input** — mentally render first, then read code for implementation flags only. Keep flags separate from findings. A raw `<p>` that renders identically to a `<Text>` component is a code flag, not a hierarchy failure. Token violations with no visible difference are code flags, not signal failures. If the user can't see it, it's not a finding.

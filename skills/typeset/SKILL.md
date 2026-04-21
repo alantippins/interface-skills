@@ -1,6 +1,6 @@
 ---
 name: typeset
-description: "Formal typography audit. Works on code, screenshots, or briefs."
+description: "Typography critique. Works on code, screenshots, or briefs."
 argument-hint: "[--plan]"
 ---
 
@@ -8,27 +8,27 @@ argument-hint: "[--plan]"
 
 By Alan Tippins
 
-Formal typography audit with four-job scoring, code flags, and generative directions. Install alongside staff-designer — they share a methodology.
+A typography critique focused on what the user feels. Findings by job, top changes to make. Install alongside staff-designer — they share a methodology.
 
 ## How It Works
 
-| Input          | Output                                             |
-| -------------- | -------------------------------------------------- |
-| Code           | Four-job score, code flags, top opportunities      |
-| Screenshot     | Four-job score, visual findings, directions        |
-| Spec / Brief   | Generate a typography system                       |
+| Input          | Output                                       |
+| -------------- | -------------------------------------------- |
+| Code           | Findings, top 3 changes, optional code flags |
+| Screenshot     | Findings, top 3 changes                      |
+| Spec / Brief   | Generate a typography system (`--plan`)      |
 
-Detect from context. If `--plan` is passed, or the input is a brief with no existing typography to review, generate a system. If the input is a screenshot or image, review visually — no code flags. Otherwise, run the full audit.
+Detect from context. If `--plan` is passed, or the input is a brief with no existing typography to review, generate a system. If the input is a screenshot, review visually. Otherwise, audit code visually first, then add code flags.
 
 ---
 
 ## Methodology
 
-The four-job framework lives in staff-designer. Load it before proceeding:
+The four-job framework (Hierarchy, Rhythm, Measure, Signal) lives in staff-designer. Load it before proceeding:
 
 → Read `~/.claude/skills/staff-designer/references/typography.md`
 
-Apply the Orient → Count → Audit → Score sequence from that file.
+Apply the Orient → Count → Audit sequence from that file.
 
 For code input, also reference [references/checks.md](references/checks.md) for implementation-level flags.
 
@@ -37,37 +37,31 @@ For code input, also reference [references/checks.md](references/checks.md) for 
 ## Audit Output
 
 ```
-## Typography Score
+## Findings
 
-| Job       | Score | Note |
-| --------- | ----- | ---- |
-| Hierarchy | 0–4   |      |
-| Rhythm    | 0–4   |      |
-| Measure   | 0–4   |      |
-| Signal    | 0–4   |      |
-| **Total** | /16   | Band |
+Hierarchy — [prose, specific and quantitative. Skip if the job is clean.]
+Rhythm — [prose. Skip if clean.]
+Measure — [prose. Skip if clean.]
+Signal — [prose. Skip if clean.]
+
+## Top 3
+1. [specific change, one sentence]
+2. [specific change, one sentence]
+3. [specific change, one sentence]
+
+## Code Flags
+- [one-liners, code input only, skip section if nothing to flag]
 ```
 
-**Score only what the user experiences.** Token mismatches that currently render correctly, off-system class names that produce the right visual output — none of these move the score. Score the screen, flag the code separately.
+**Findings.** Write what the user feels. Raw `<span>` that renders correctly is not a finding. Skip any job that's clean — a short honest audit beats four-section theater. Name what's working in one sentence; spend the words on the real issues. After naming a problem, show what great looks like specifically.
 
-**Findings** — Prose by job. Bolded issue name. Specific and quantitative. Name what's working and what isn't. For every problem, show what great looks like.
+Hypothetical failures ("would break in monochrome," "would collapse under long copy") belong in Top 3 as a real change, not in findings. Audit the current experience, not imagined ones.
 
-**Where this could go** — Up to three directions, included only when earned. If the work is already doing its job in that dimension, say so and skip. Two earned directions beat three forced ones. Never manufacture a ceiling to fill a slot.
+**Font direction.** Assume the typeface was chosen. Don't comment on an established design-system font as a stylistic preference. Font commentary belongs in `--plan` mode, or as a finding when the Orient step's Font Fit check surfaces a real mismatch — no custom font loaded, expressive product running on a utility sans, marketing hero using the body UI font. Default is silence.
 
-1. **Font direction** — Default to silence. If the product has an established design-system typeface that is loading correctly and doing its job, do not comment on it. Assume the font was chosen. Only include this direction when one of the following is true:
-   - No custom font is loaded and the interface is falling back to a system default (check `tailwind.config`, `globals.css`, or `@font-face` declarations — if you can't find a loaded font, flag it).
-   - The input is a brief or `--plan` run where the system is being designed from scratch.
-   - There is a genuine mismatch between the typeface and what the product needs to do (e.g., expressive consumer product using a utility sans, reading-heavy product using a condensed UI face, marketing hero using the body UI font).
+**Code Flags.** Token inconsistencies, off-system classes, raw HTML. One line each. Advisory. Skip the section if there's nothing to flag.
 
-   When it does apply, be specific: not "try a serif" but "a humanist display type at the heading level would give this the warmth that Inter can't carry — something like DM Serif Display or Fraunces." Never suggest swapping an established design-system font as a stylistic preference.
-
-2. **Hierarchy vision** — Include only if hierarchy has room to grow under pressure. What would intentional craft look like at scale, with real content?
-
-3. **System maturity** — Include only if there's structural work that would make this scale reliably. Naming, tokens, constraints, missing components.
-
-**Code Flags** — (code input only) Token inconsistencies, missing constraints, off-system values. Advisory — don't tank the score. See [references/checks.md](references/checks.md).
-
-**Top Opportunities** — 3 highest-impact changes, one sentence each. Visual issues first, code flags second.
+**Top 3.** The three highest-impact changes. Visual first, code second. One sentence each, specific: "Swap `leading-5` to `leading-normal` on OnboardingValueCard description" beats "fix line-height."
 
 ---
 
@@ -94,6 +88,9 @@ Make decisions. State the ratio, state the base, state why it fits the context.
 ## Plan Output
 
 ```
+## Font
+[Typeface recommendation with reasoning. Specific: "Inter for UI, DM Serif Display at heading for warmth."]
+
 ## Scale
 Base: [size]px · Ratio: [ratio or named increment]
 
@@ -135,11 +132,13 @@ Use tabular-nums on numeric data.
 
 ## Voice
 
-Same posture as staff-designer — direct, specific, quantitative, but oriented toward the upside. Typeset is the typography depth layer: it goes where staff-designer's Craft principle points but doesn't follow.
+Same posture as staff-designer — direct, specific, quantitative, oriented toward the upside. Typeset is the typography depth layer: it goes where staff-designer's Craft principle points but doesn't follow.
 
-Name what's actually there before naming what's wrong. Frame findings as what the typography could be doing, not just what it isn't. "The description text sits at the same weight and line-height as the label above it — one level is doing two jobs, and the user has to work harder to parse the card" is a finding. "The hierarchy is unclear" is not.
+Name what's actually there before naming what's wrong. Frame findings as what the typography could be doing. "The description sits at the same weight and line-height as the label above it — one level doing two jobs, and the user has to work harder to parse the card" is a finding. "The hierarchy is unclear" is not.
 
-Show what great looks like. After naming a problem, describe the better version specifically. Not "increase line-height on descriptions" — "giving descriptions a looser line-height would let them breathe as supporting copy instead of competing with the label for attention."
+After naming a problem, describe the better version specifically. "Giving descriptions a looser line-height would let them breathe as supporting copy instead of competing with the label for attention" beats "increase line-height on descriptions."
+
+Skip jobs that are clean. Saying nothing about Measure when measure is fine is correct. Filling four sections because there are four sections is how drift starts.
 
 For plan mode: make decisions. "Use a 1.333 ratio — Perfect Fourth — because this is a reading-heavy product and the intervals give headings enough presence without needing large sizes" is useful. A table of options asking the user to choose is not.
 
